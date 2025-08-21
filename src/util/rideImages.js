@@ -7,16 +7,22 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/630/354/75/dam/wdpro-assets/gallery/attractions/magic-kingdom/buzz-lightyear-space-ranger-spin/buzz-lightyear-space-ranger-spin-gallery00.jpg",
   "Casey Jr. Splash 'N' Soak Station":
     "https://d3bo0mk5kk7egf.cloudfront.net/imgstore/ElementGalleryItems/attractions/Fullsize/Casey-Jr-Splash-n-Soak-Station_Full_42044.jpg",
+  "Casey's Corner":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/caseys-corner/caseys-corner-gallery00.jpg",
   "Cinderella's Royal Table":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/630/354/75/dam/wdpro-assets/things-to-do/dining/magic-kingdom/cinderellas-royal-table/cinderella-royal-table-08.jpg",
   "Cinderella Castle":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/disney-world/attractions/magic-kingdom/cinderella-castle/castle-rainbow-lt-16x9.jpg",
+  "Columbia Harbour House":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/columbia-harbour-house/columbia-harbour-house-gallery00.jpg",
+  "Cosmic Ray's Starlight Café":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/cosmic-ray-starlight-cafe/cosmic-ray-starlight-cafe-gallery00.jpg",
   "Country Bear Musical Jamboree":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/country-bear-jamboree/0703ZM_1329SD-2-16x9.jpg",
-  "The Diamond Horseshoe":
-    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/diamond-horseshoe/Diamond-Horseshoe-interior-wide-16x9.jpg",
   "Enchanted Tales with Belle":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/magic-kingdom/enchanted-tales-with-belle/enchanted-tales-with-belle-gallery03.jpg?1585676702917",
+  "Golden Oak Outpost":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/golden-oak-outpost-00-16x9.jpg",
   '"it\'s a small world"':
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/its-a-small-world/its-a-small-world-00.jpg",
   "Jungle Cruise":
@@ -31,6 +37,8 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/things-to-do/dining/magic-kingdom/liberty-tree-tavern/liberty-tree-tavern-00.jpg",
   "Mad Tea Party":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/mad-tea-party/mad-tea-party-00.jpg",
+  "Main Street Confectionery":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/shopping/main-street-confectionery/0530ZO_0125AS.jpg",
   "Main Street Vehicles":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/main-street-vehicles/main-street-vehicles-00.jpg",
   "Meet Ariel at Her Grotto":
@@ -53,22 +61,38 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/magic-kingdom/monsters-inc-laugh-floor/monsters-inc-laugh-floor-gallery02.jpg",
   "Peter Pan's Flight":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/magic-kingdom/peter-pans-flight/peter-pans-flight-gallery11.jpg",
+  "Pecos Bill Tall Tale Inn and Cafe":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/pecos-bill-tall-tale-inn-and-cafe/pecos-bill-tall-tale-inn-and-cafe-gallery05.jpg",
+  "Pinocchio Village Haus":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/pinocchio-village-haus/pinocchio-village-haus-gallery00.jpg",
   "Pirates of the Caribbean":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/pirates-of-the-caribbean/pirates-of-the-caribbean-00.jpg",
   "Prince Charming Regal Carrousel":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/magic-kingdom/prince-charming-regal-carrousel/prince-charming-regal-carrousel-gallery00.jpg",
+  "Sleepy Hollow":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/sleepy-hollow/sleepy-hollow-gallery02.jpg",
   "Space Mountain":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/space-mountain/space-mountain-00.jpg",
   "Splash Mountain":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/splash-mountain/splash-mountain-00.jpg",
+  "Sunshine Tree Terrace":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/sunshine-tree-terrace/sunshine-tree-terrace-gallery05.jpg",
   "Swiss Family Treehouse":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/swiss-family-treehouse/swiss-family-treehouse-00.jpg",
   "The Barnstormer":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/magic-kingdom/barnstormer-starring-the-great-goofini/barnstormer-starring-great-goofini-gallery06.jpg",
+  "The Beak and Barrel":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/beak-barrel/Pirates-of-the-Caribbean_Full_57214-16x9-16x9.jpg",
   "The Crystal Palace":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/the-crystal-palace/crystal-palace-gallery09.jpg",
+  "The Diamond Horseshoe":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/diamond-horseshoe/Diamond-Horseshoe-interior-wide-16x9.jpg",
+  "The Friar's Nook":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/things-to-do/dining/magic-kingdom/friars-nook/friars-nook-00.jpg",
   "The Hall of Presidents":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/the-hall-of-presidents/hall-of-presidents-04.jpg?1611118822365",
+  "The Lunching Pad":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/things-to-do/dining/magic-kingdom/the-lunching-pad/lunching-pad-00.jpg",
   "The Magic Carpets of Aladdin":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/the-magic-carpets-of-aladdin/magic-carpets-of-aladdin-00.jpg",
   "The Many Adventures of Winnie the Pooh":
@@ -85,6 +109,8 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/tom-sawyer-island/tom-sawyer-island-00.jpg",
   "Tony's Town Square Restaurant":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/things-to-do/dining/magic-kingdom/tonys-town-square/tonys-town-square-restaurant-00.jpg",
+  "Tortuga Tavern":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/tortuga-tavern/tortuga-tavern-gallery16-exterior.jpg",
   "Trick-or-Treat Locations at Mickey's Not-So-Scary Halloween Party":
     "https://cdn1.parksmedia.wdprapps.disney.com/vision-dam/digital/parks-platform/parks-global-assets/disney-world/events/mickeys-not-so-scary/experience/0729ZM_3043AFN_xak-32X9.jpg?",
   "Under the Sea - Journey of The Little Mermaid":

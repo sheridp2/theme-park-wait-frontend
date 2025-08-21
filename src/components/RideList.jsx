@@ -48,23 +48,23 @@ const ParksList = () => {
 
   return (
 
-    <div >
+    <div>
       <p>Disney's Magic Kingdom</p>
       <p>Park Hours: {openingTime} - {closingTime}</p>
       <div className="container mx-auto">
         <p>Open Rides</p>
-        <div className="flex flex-wrap">
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
           {operatingRides?.map((ride) => {
             return (
-            <RideInfoCard key={ride.id} name={ride.name} waitTime={ride.waitTime} />
+            <RideInfoCard key={ride.id} ride={ride}/>
             )
           })}
         </div>
           <p>Closed Rides</p>
-        <div className="flex flex-wrap ">
+        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
           {closedRides?.map((ride) => {
             return (
-              <RideInfoCard key={ride.id} name={ride.name} waitTime={ride.waitTime} />
+              <RideInfoCard key={ride.id} ride={ride} />
             )
           })}
         </div>
