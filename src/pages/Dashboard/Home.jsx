@@ -1,12 +1,13 @@
-import React from 'react'
-import ParksList from '../../components/RideList'
+import React from "react";
+import DashboardLayout from "../../layouts/DashboardLayout";
+import ParksList from "../../components/ParksList";
 
 const Home = () => {
   return (
-    <div>
+    <DashboardLayout activeMenu="Home Page">
       <ParksList />
-    </div>
-  )
-}
+    </DashboardLayout>
+  );
+};
 
-export default Home
+export default Home;

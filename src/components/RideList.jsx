@@ -2,19 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import RideInfoCard from "./RideInfoCard";
 
-const ParksList = () => {
+const ParksList = ({ park }) => {
   const [parkData, setParkData] = useState([]);
   const [operatingRides, setOperatingRides] = useState([]);
   const [closedRides, setClosedRides] = useState([]);
-  const [parkHours, setParkHours] = useState([]);
-  const [openingTime, setOpeningTime] = useState([]);
-  const [closingTime, setClosingTime] = useState([]);
 
   useEffect(() => {
     const closedRidesArray = [];
     const operatingRidesArray = [];
+    const parkUrl = park.replace(/\s+/g, '').toLowerCase();
+    
     axios
-      .get("http://localhost:8000/disneyworld-magickingdom-waittimes")
+      .get(`http://localhost:8000/disneyworld-${parkUrl}-waittimes`)
       .then((res) => {
         res.data.forEach((ride) => {
           if (
@@ -37,22 +36,14 @@ const ParksList = () => {
         setClosedRides(closedRidesArray);
         setParkData(res.data);
       });
-    axios
-      .get("http://localhost:8000/disneyworld-magickingdom-parkhours")
-      .then((res) => {
-        setParkHours(res.data[0]);
-        setOpeningTime(res.data[0].openingTime.split("T")[1].split("-")[0]);
-        setClosingTime(res.data[0].closingTime.split("T")[1].split("-")[0]);
-      });
   }, []);
 
   return (
 
     <div>
       <p>Disney's Magic Kingdom</p>
-      <p>Park Hours: {openingTime} - {closingTime}</p>
       <div className="container mx-auto">
-        <p>Open Rides</p>
+        
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
           {operatingRides?.map((ride) => {
             return (
@@ -60,7 +51,9 @@ const ParksList = () => {
             )
           })}
         </div>
-          <p>Closed Rides</p>
+        <div className="py-6">
+          <h2>Closed Rides</h2>
+        </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
           {closedRides?.map((ride) => {
             return (
