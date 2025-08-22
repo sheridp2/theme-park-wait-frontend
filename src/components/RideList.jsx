@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import RideInfoCard from "./RideInfoCard";
+import { PARKS_LIST } from "../util/data";
 
 const ParksList = ({ park }) => {
   const [parkData, setParkData] = useState([]);
@@ -15,11 +16,10 @@ const ParksList = ({ park }) => {
     axios
       .get(`http://localhost:8000/disneyworld-${parkUrl}-waittimes`)
       .then((res) => {
-        res.data.forEach((ride) => {
+        const sortedRides = res.data.sort((a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0));
+        sortedRides.forEach((ride) => {
           if (
-            ride.name === "Trick-or-Treat Locations at Mickey's Not-So-Scary Halloween Party" ||
-            ride.name === "Casey Jr. Splash 'N' Soak Station" ||
-            ride.name === "Allergy-Friendly Trick-or-Treat Experience at Mickey's Not-So-Scary Halloween Party"
+            PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name)
           ) {
             return; // Skip this ride
           }
@@ -41,9 +41,14 @@ const ParksList = ({ park }) => {
   return (
 
     <div>
-      <p>Disney's Magic Kingdom</p>
+      <div className="py-6">
+        <h2>{park}</h2>
+
+      </div>
       <div className="container mx-auto">
-        
+        <div className="py-2">
+          <h3>Open Rides</h3>
+        </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
           {operatingRides?.map((ride) => {
             return (
@@ -51,8 +56,8 @@ const ParksList = ({ park }) => {
             )
           })}
         </div>
-        <div className="py-6">
-          <h2>Closed Rides</h2>
+        <div className="py-2">
+          <h3>Closed Rides</h3>
         </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
           {closedRides?.map((ride) => {

@@ -5,7 +5,10 @@ import ParkCard from './ParkCard'
 const ParksList = () => {
   return (
     <div>
-      <h2>ParksList</h2>
+      <div className="py-6">
+        <h2>Parks List</h2>
+
+      </div>
       <div className='grid lg:grid-cols-2 md:grid-cols-1 gap-4'>
 
       {PARKS_LIST.map((park) => {

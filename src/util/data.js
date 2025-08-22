@@ -15,14 +15,14 @@ export const SIDE_MENU_DATA = [
     id: '02',
     label: "Magic Kingdom",
     icon: LuCastle,
-    path: "/magic-kingdom",
+    path: "/magickingdom",
   },
 
   {
     id: '02',
     label: "Epcot",
     icon: ImSphere,
-    path: "/Epcot",
+    path: "/epcot",
   },
   
 ]
@@ -33,13 +33,16 @@ export const PARKS_LIST = [
     name: "Magic Kingdom",
     image: "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/630/354/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/cinderella-castle/0724ZQ_0195MS_JLM-16x9.jpg",
     hoursUrl: "disneyworld-magickingdom-parkhours",
-    waitTimesUrl: "disneyworld-magickingdom-waittimes"
+    waitTimesUrl: "disneyworld-magickingdom-waittimes",
+    ignored: ["Trick-or-Treat Locations at Mickey's Not-So-Scary Halloween Party", "Casey Jr. Splash 'N' Soak Station", "Allergy-Friendly Trick-or-Treat Experience at Mickey's Not-So-Scary Halloween Party"]
+
   },
   {
     id: '02',
     name: "Epcot",
     image: "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1200/675/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/spaceship-earth/0502ZN_0017AS_JB_1-16x9.jpg",
     hoursUrl: "disneyworld-epcot-parkhours",
-    waitTimesUrl: "disneyworld-epcot-waittimes"
+    waitTimesUrl: "disneyworld-epcot-waittimes",
+    ignored:["GRAB-N-GOOF"]
   }
 ]
