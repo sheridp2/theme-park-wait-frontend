@@ -89,7 +89,49 @@ const RideInfoCard = ({ ride, compactView }) => {
           </div>
         </div>
       ) : (
-        <div>Compact View</div>
+        <div className="flex items-center bg-white border border-gray-200 rounded-lg shadow-sm flex-row w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+          {rideMP4[ride.name] ? (
+            <video
+              className="object-cover rounded-t-lg h-auto sm:w-48 w-28 rounded-none rounded-s-lg"
+              src={rideMP4[ride.name]}
+              autoPlay
+              loop
+              muted
+            />
+          ) : (
+            <img
+              className="object-cover rounded-t-lg h-auto sm:w-48 w-28 rounded-none rounded-s-lg"
+              src={rideImages[ride.name]}
+              alt={`Image of ${ride.name}`}
+            />
+          )}
+          <div className="flex flex-1 flex-row justify-between items-center p-2 leading-normal">
+            <div>
+              <h5 className="font-bold sm:text-2xl text-sm tracking-tight text-gray-900 dark:text-white">
+                {ride.name}
+              </h5>
+              <div>
+                {ride.meta?.type === "ATTRACTION" && (
+                  <span className=" bg-red-600 text-white text-xs font-bold px-3 py-1 rounded shadow">
+                    ATTRACTION
+                  </span>
+                )}
+                {ride.meta?.type === "RESTAURANT" && (
+                  <span className=" bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded shadow">
+                    RESTAURANT
+                  </span>
+                )}
+              </div>
+            </div>
+            <div>
+              {ride.status !== "Closed" && (
+                <div className="font-bold text-white bg-blue-600 px-3 py-1 rounded-full shadow text-md w-max">
+                  {ride.waitTime} mins
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

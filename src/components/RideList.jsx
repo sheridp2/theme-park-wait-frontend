@@ -1,14 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import RideInfoCard from "./RideInfoCard";
-import { PARKS_LIST } from "../util/data";
-import moment from "moment";
+import { PARKS_LIST } from "../util/data";;
 
 const ParksList = ({ park }) => {
   const [parkData, setParkData] = useState([]);
   const [operatingRides, setOperatingRides] = useState([]);
   const [closedRides, setClosedRides] = useState([]);
-  const [minWait, setMinWait] = useState(0);
   const [compactView, setCompactView] = useState(false);
   const [filters, setFilters] = useState({
     attractions: true,
@@ -16,10 +14,18 @@ const ParksList = ({ park }) => {
     // add more filters here
   });
 
+  const toggleCompactView = () => {
+    localStorage.setItem('compactView', JSON.stringify(!compactView));
+    setCompactView(!compactView);
+  };
+
   useEffect(() => {
     const closedRidesArray = [];
     const operatingRidesArray = [];
     const parkUrl = park.replace(/\s+/g, "").toLowerCase();
+
+    const compactViewStorage = JSON.parse(localStorage.getItem('compactView'));
+    setCompactView(compactViewStorage ?? false);
 
     axios
       .get(`http://localhost:8000/disneyworld-${parkUrl}-waittimes`)
@@ -61,7 +67,7 @@ const ParksList = ({ park }) => {
               value=""
               className="sr-only peer"
               checked={compactView}
-              onChange={() => setCompactView(!compactView)}
+              onChange={() => toggleCompactView()}
             />
             <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
             <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
@@ -130,7 +136,7 @@ const ParksList = ({ park }) => {
             ))}
         </div>
         <div className="py-2">
-          <h3>Closed Rides</h3>
+          <h3 className="mt-4">Closed Rides</h3>
         </div>
         <div className={`grid ${compactView ? "grid-cols-1" : "lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"} gap-4`}>
           {closedRides
