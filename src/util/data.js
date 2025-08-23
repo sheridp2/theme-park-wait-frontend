@@ -4,6 +4,7 @@ import {
 } from "react-icons/lu"
 import { ImSphere } from "react-icons/im";
 import { GiElephant } from "react-icons/gi";
+import { FaHotel } from "react-icons/fa6";
 
 export const SIDE_MENU_DATA = [
   {
@@ -30,6 +31,13 @@ export const SIDE_MENU_DATA = [
     label: "Animal Kingdom",
     icon: GiElephant,
     path: "/animalkingdom",
+  },
+
+  {
+    id: '04',
+    label: "Hollywood Studios",
+    icon: FaHotel,
+    path: "/hollywoodstudios",
   },
   
 ]
@@ -60,4 +68,12 @@ export const PARKS_LIST = [
     waitTimesUrl: "disneyworld-animalkingdom-waittimes",
     ignored:[]
   },
+  {
+    id: '04',
+    name: "Hollywood Studios",
+    image: "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1200/675/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/hollywood-tower-of-terror/Disneys-Hollywood-Studios-27-16x9.jpg",
+    hoursUrl: "disneyworld-hollywoodstudios-parkhours",
+    waitTimesUrl: "disneyworld-hollywoodstudios-waittimes",
+    ignored:[]
+  }
 ]

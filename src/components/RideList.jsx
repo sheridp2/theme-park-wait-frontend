@@ -9,6 +9,7 @@ const ParksList = ({ park }) => {
   const [operatingRides, setOperatingRides] = useState([]);
   const [closedRides, setClosedRides] = useState([]);
   const [minWait, setMinWait] = useState(0);
+  const [compactView, setCompactView] = useState(false);
   const [filters, setFilters] = useState({
     attractions: true,
     restaurants: true,
@@ -49,8 +50,25 @@ const ParksList = ({ park }) => {
 
   return (
     <div className="container mx-auto">
-      <div className="py-6">
-        <h2>{park}</h2>
+      <div className="flex py-6 justify-between items-center">
+        <div className="">
+          <h2>{park}</h2>
+        </div>
+        <div className="inline-block align-middle">
+          <label className="inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              value=""
+              className="sr-only peer"
+              checked={compactView}
+              onChange={() => setCompactView(!compactView)}
+            />
+            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+              Compact View
+            </span>
+          </label>
+        </div>
       </div>
       <div className="mb-4 flex gap-4">
         <ul className="items-center w-sm text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -100,7 +118,7 @@ const ParksList = ({ park }) => {
         <div className="py-2">
           <h3>Open Rides</h3>
         </div>
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
+        <div className={`grid ${compactView ? "grid-cols-1" : "lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"} gap-4`}>
           {operatingRides
             .filter(
               (ride) =>
@@ -108,13 +126,13 @@ const ParksList = ({ park }) => {
                 (ride.meta?.type === "RESTAURANT" && filters.restaurants)
             )
             .map((ride) => (
-              <RideInfoCard key={ride.id} ride={ride} />
+              <RideInfoCard key={ride.id} ride={ride} compactView={compactView} />
             ))}
         </div>
         <div className="py-2">
           <h3>Closed Rides</h3>
         </div>
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
+        <div className={`grid ${compactView ? "grid-cols-1" : "lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"} gap-4`}>
           {closedRides
             .filter(
               (ride) =>
@@ -122,7 +140,7 @@ const ParksList = ({ park }) => {
                 (ride.meta?.type === "RESTAURANT" && filters.restaurants)
             )
             .map((ride) => (
-              <RideInfoCard key={ride.id} ride={ride} />
+              <RideInfoCard key={ride.id} ride={ride} compactView={compactView} />
             ))}
         </div>
       </div>

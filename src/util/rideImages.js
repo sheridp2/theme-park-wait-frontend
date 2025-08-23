@@ -33,6 +33,10 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/disney-world/attractions/magic-kingdom/cinderella-castle/castle-rainbow-lt-16x9.jpg",
   "Columbia Harbour House":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/columbia-harbour-house/columbia-harbour-house-gallery00.jpg",
+  "CommuniCore Hall Show Kitchen":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/entertainment/communicore-plaza-stage/0813ZM_3913SD_xak-16x9.jpg",
+  "Connections Café":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/things-to-do/dining/downtown-disney/starbucks/starbucks-00.jpg",
   "Coral Reef Restaurant":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/coral-reef/WDW_EC_CoralReef_MahiMahi_STYLIZED_040224_1597_KE-16x9.jpg",
   "Cosmic Ray's Starlight Café":
@@ -71,8 +75,12 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/magic-kingdom/jungle-cruise/jungle-cruise-gallery09.jpg?1583770589146",
   "Jungle Navigation Co. LTD Skipper Canteen":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/jungle-navigation-skipper-canteen/jungle-skipper-fried-chicken-16x9.jpg",
+  "Katsura Grill":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/epcot/katsura-grill/katsura-grill-gallery00.jpg",
   "Kidcot Fun Stops":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/epcot/kidcot/kidcot-fun-stops/american-adventrue-kidcot-sign-16x9-16x9.jpg",
+  "La Crêperie de Paris":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/0218ZP_10173MS_jrod_r2.jpg",
   "La Hacienda de San Angel":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/epcot/la-hacienda-de-san-angel/hacienda-de-san-angel-gallery00.jpg",
   "Le Cellier Steakhouse":
@@ -123,6 +131,8 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/pinocchio-village-haus/pinocchio-village-haus-gallery00.jpg",
   "Pirates of the Caribbean":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/pirates-of-the-caribbean/pirates-of-the-caribbean-00.jpg",
+  "Pizza al Taglio":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/pizza-al-taglio/WDW_EC_FW_ITALY_PIZZA-WINDOW_PIZZA_STYLIZED_071624_3927_SN-16x9.jpg",
   "Prince Charming Regal Carrousel":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/magic-kingdom/prince-charming-regal-carrousel/prince-charming-regal-carrousel-gallery00.jpg",
   "Project Tomorrow: Inventing the Wonders of the Future":
@@ -137,12 +147,18 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/epcot/sea-base/seabase-gallery11.jpg",
   "San Angel Inn Restaurante":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/epcot/san-angel-inn-restaurante/san-angel-inn-restaurante-gallery07.jpg",
+  "Shiki-Sai: Sushi Izakaya":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/shiki-sai-izakaya-and-sushi/1-Sushi-Menu-Grand-View-2-SH-16x9.jpg",
   "Sleepy Hollow":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/sleepy-hollow/sleepy-hollow-gallery02.jpg",
   "Soarin' Around the World":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/epcot/soarin/soarin-gallery07.jpg",
   "Spaceship Earth":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/epcot/spaceship-earth/spaceship-earth-gallery00.jpg",
+  "Space 220 Lounge":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/space-220/Mystic-Margarita-16x9.jpg",
+  "Space 220 Restaurant":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/space-220/0324ZO_0259KP_xak-16x9.jpg",
   "Space Mountain":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/space-mountain/space-mountain-00.jpg",
   "Spice Road Table":
@@ -155,10 +171,14 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/magic-kingdom/sunshine-tree-terrace/sunshine-tree-terrace-gallery05.jpg",
   "Swiss Family Treehouse":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/swiss-family-treehouse/swiss-family-treehouse-00.jpg",
+  "Takumi-Tei":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/disney-world/dining/epcot/takumi-tei/epcot-japanese-pavillion-16x9.jpg",
   "Teppan Edo":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/epcot/teppan-edo/teppan-edo-gallery03.jpg",
   "Test Track":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/test-track/Test-Track-Interior-ONLY-approved-rendering-1-16x9.jpg",
+  "Tutto Italia Ristorante":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/epcot/tutto-italia-ristorante/tutto-italia-ristorante-gallery01.jpg",
   "The American Adventure":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/epcot/the-american-adventure/american-adventure-gallery07.jpg",
   "The Barnstormer":
@@ -201,6 +221,8 @@ export const rideImages = {
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/epcot/turtle-talk-with-crush/turtle-talk-with-crush-gallery01.jpg",
   "Under the Sea - Journey of The Little Mermaid":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/under-the-sea-journey-of-the-little-mermaid/under-the-sea-journey-of-the-little-mermaid-new-00.jpg",
+  "Via Napoli Ristorante e Pizzeria":
+    "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/epcot/via-napoli/via-napoli-gallery03.jpg",
   "Walt Disney's Carousel of Progress":
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/parks-and-tickets/attractions/magic-kingdom/walt-disneys-carousel-of-progress/walt-disney-carousel-of-progress-00.jpg",
   "Walt Disney's Enchanted Tiki Room":
