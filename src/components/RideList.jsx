@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import RideInfoCard from "./RideInfoCard";
 import { PARKS_LIST } from "../util/data";;
 
@@ -14,10 +14,10 @@ const ParksList = ({ park }) => {
     // add more filters here
   });
 
-  const toggleCompactView = () => {
+  const toggleCompactView = useCallback(() => {
     localStorage.setItem('compactView', JSON.stringify(!compactView));
-    setCompactView(!compactView);
-  };
+    setCompactView((prev) => !prev);
+  }, [compactView]);
 
   useEffect(() => {
     const closedRidesArray = [];
@@ -25,7 +25,9 @@ const ParksList = ({ park }) => {
     const parkUrl = park.replace(/\s+/g, "").toLowerCase();
 
     const compactViewStorage = JSON.parse(localStorage.getItem('compactView'));
-    setCompactView(compactViewStorage ?? false);
+    if (compactViewStorage) {
+      setCompactView(compactViewStorage);
+    }
 
     axios
       .get(`http://localhost:8000/disneyworld-${parkUrl}-waittimes`)
@@ -132,7 +134,7 @@ const ParksList = ({ park }) => {
                 (ride.meta?.type === "RESTAURANT" && filters.restaurants)
             )
             .map((ride) => (
-              <RideInfoCard key={ride.id} ride={ride} compactView={compactView} />
+              <RideInfoCard key={ride.id} ride={ride} compactView={compactView} park={park} />
             ))}
         </div>
         <div className="py-2">
@@ -146,7 +148,7 @@ const ParksList = ({ park }) => {
                 (ride.meta?.type === "RESTAURANT" && filters.restaurants)
             )
             .map((ride) => (
-              <RideInfoCard key={ride.id} ride={ride} compactView={compactView} />
+              <RideInfoCard key={ride.id} ride={ride} compactView={compactView} park={park}/>
             ))}
         </div>
       </div>
