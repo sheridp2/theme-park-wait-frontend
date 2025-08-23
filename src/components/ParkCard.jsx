@@ -1,18 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment"; // Add this import
 
 const ParkCard = ({ park }) => {
   const [parkHours, setParkHours] = useState([]);
-  const [openingTime, setOpeningTime] = useState([]);
-  const [closingTime, setClosingTime] = useState([]);
+  const [openingTime, setOpeningTime] = useState("");
+  const [closingTime, setClosingTime] = useState("");
   const parkUrl = park.name.replace(/\s+/g, '').toLowerCase();
 
   useEffect(() => {
     axios.get(`http://localhost:8000/${park.hoursUrl}`).then((res) => {
       setParkHours(res.data[0]);
-      setOpeningTime(res.data[0].openingTime.split("T")[1].split("-")[0]);
-      setClosingTime(res.data[0].closingTime.split("T")[1].split("-")[0]);
+      setOpeningTime(
+        moment(res.data[0].openingTime).format("h:mm A")
+      );
+      setClosingTime(
+        moment(res.data[0].closingTime).format("h:mm A")
+      );
     });
   }, []);
 

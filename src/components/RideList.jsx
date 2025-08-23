@@ -2,21 +2,30 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import RideInfoCard from "./RideInfoCard";
 import { PARKS_LIST } from "../util/data";
+import moment from "moment";
 
 const ParksList = ({ park }) => {
   const [parkData, setParkData] = useState([]);
   const [operatingRides, setOperatingRides] = useState([]);
   const [closedRides, setClosedRides] = useState([]);
+  const [minWait, setMinWait] = useState(0);
+  const [filters, setFilters] = useState({
+    attractions: true,
+    restaurants: true,
+    // add more filters here
+  });
 
   useEffect(() => {
     const closedRidesArray = [];
     const operatingRidesArray = [];
-    const parkUrl = park.replace(/\s+/g, '').toLowerCase();
-    
+    const parkUrl = park.replace(/\s+/g, "").toLowerCase();
+
     axios
       .get(`http://localhost:8000/disneyworld-${parkUrl}-waittimes`)
       .then((res) => {
-        const sortedRides = res.data.sort((a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0));
+        const sortedRides = res.data.sort(
+          (a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0)
+        );
         sortedRides.forEach((ride) => {
           if (
             PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name)
@@ -39,34 +48,83 @@ const ParksList = ({ park }) => {
   }, []);
 
   return (
-
-    <div>
+    <div className="container mx-auto">
       <div className="py-6">
         <h2>{park}</h2>
-
       </div>
-      <div className="container mx-auto">
+      <div className="mb-4 flex gap-4">
+        <ul className="items-center w-sm text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+            <div className="flex items-center ps-3">
+              <input
+                checked={filters.attractions}
+                onChange={(e) =>
+                  setFilters({ ...filters, attractions: e.target.checked })
+                }
+                id="vue-checkbox-list"
+                type="checkbox"
+                value=""
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+              />
+              <label
+                htmlFor="vue-checkbox-list"
+                className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                ATTRACTIONS
+              </label>
+            </div>
+          </li>
+          <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+            <div className="flex items-center ps-3">
+              <input
+                checked={filters.restaurants}
+                onChange={(e) =>
+                  setFilters({ ...filters, restaurants: e.target.checked })
+                }
+                id="react-checkbox-list"
+                type="checkbox"
+                value=""
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+              />
+              <label
+                htmlFor="react-checkbox-list"
+                className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                RESTAURANTS
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div>
         <div className="py-2">
           <h3>Open Rides</h3>
         </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
-          {operatingRides?.map((ride) => {
-            return (
-            <RideInfoCard key={ride.id} ride={ride}/>
+          {operatingRides
+            .filter(
+              (ride) =>
+                (ride.meta?.type === "ATTRACTION" && filters.attractions) ||
+                (ride.meta?.type === "RESTAURANT" && filters.restaurants)
             )
-          })}
+            .map((ride) => (
+              <RideInfoCard key={ride.id} ride={ride} />
+            ))}
         </div>
         <div className="py-2">
           <h3>Closed Rides</h3>
         </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4">
-          {closedRides?.map((ride) => {
-            return (
-              <RideInfoCard key={ride.id} ride={ride} />
+          {closedRides
+            .filter(
+              (ride) =>
+                (ride.meta?.type === "ATTRACTION" && filters.attractions) ||
+                (ride.meta?.type === "RESTAURANT" && filters.restaurants)
             )
-          })}
+            .map((ride) => (
+              <RideInfoCard key={ride.id} ride={ride} />
+            ))}
         </div>
-
       </div>
     </div>
   );

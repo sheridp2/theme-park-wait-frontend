@@ -3,6 +3,7 @@ import {
   LuCastle,
 } from "react-icons/lu"
 import { ImSphere } from "react-icons/im";
+import { GiElephant } from "react-icons/gi";
 
 export const SIDE_MENU_DATA = [
   {
@@ -24,6 +25,12 @@ export const SIDE_MENU_DATA = [
     icon: ImSphere,
     path: "/epcot",
   },
+  {
+    id: '03',
+    label: "Animal Kingdom",
+    icon: GiElephant,
+    path: "/animalkingdom",
+  },
   
 ]
 
@@ -44,5 +51,13 @@ export const PARKS_LIST = [
     hoursUrl: "disneyworld-epcot-parkhours",
     waitTimesUrl: "disneyworld-epcot-waittimes",
     ignored:["GRAB-N-GOOF"]
-  }
+  },
+  {
+    id: '03',
+    name: "Animal Kingdom",
+    image: "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/715/715/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/tree-of-life/tree-of-life-gallery01-16x9.jpg",
+    hoursUrl: "disneyworld-animalkingdom-parkhours",
+    waitTimesUrl: "disneyworld-animalkingdom-waittimes",
+    ignored:[]
+  },
 ]
