@@ -40,11 +40,11 @@ const RideInfoCard = ({ ride, compactView, park }) => {
             <div className="font-bold text-base  mb-1 sm:mb-2">{ride.name}</div>
             {ride.status === "Down" ? (
               <div
-                class="flex items-center p-4 mt-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                className="flex items-center p-4 mt-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
                 role="alert"
               >
                 <svg
-                  class="shrink-0 inline w-4 h-4 me-3"
+                  className="shrink-0 inline w-4 h-4 me-3"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -52,9 +52,9 @@ const RideInfoCard = ({ ride, compactView, park }) => {
                 >
                   <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                 </svg>
-                <span class="sr-only">Info</span>
+                <span className="sr-only">Info</span>
                 <div>
-                  Ride status: <span class="font-medium">{ride.status}</span>
+                  Ride status: <span className="font-medium">{ride.status}</span>
                 </div>
               </div>
             ) : (
@@ -119,7 +119,7 @@ const RideInfoCard = ({ ride, compactView, park }) => {
               <h5 className="font-bold sm:text-2xl pb-2 text-sm tracking-tight text-gray-900 dark:text-white">
                 {ride.name}
               </h5>
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap gap-0.5">
                 <div>
                   {ride.meta?.type === "ATTRACTION" && (
                     <span className=" bg-red-600 text-white text-xs font-bold px-3 py-1 rounded shadow">

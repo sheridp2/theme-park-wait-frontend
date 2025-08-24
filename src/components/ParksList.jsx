@@ -1,5 +1,5 @@
 import React from 'react'
-import { PARKS_LIST } from '../util/data'
+import { DISNEY_WORLD_PARKS_LIST } from '../util/data'
 import ParkCard from './ParkCard'
 
 const ParksList = () => {
@@ -11,7 +11,7 @@ const ParksList = () => {
       </div>
       <div className='grid lg:grid-cols-2 md:grid-cols-1 gap-4'>
 
-      {PARKS_LIST.map((park) => {
+      {DISNEY_WORLD_PARKS_LIST.map((park) => {
         return(
           <ParkCard key={park.id} park={park} />
         )

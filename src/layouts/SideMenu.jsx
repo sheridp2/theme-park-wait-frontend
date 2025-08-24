@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 
 import { UserContext } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
-// import CharAvatar from "../Cards/CharAvatar";
 import toast from "react-hot-toast";
 import { SIDE_MENU_DATA } from "../util/data";
 
@@ -28,28 +27,7 @@ const SideMenu = ({ activeMenu }) => {
 
   return (
     <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 p-5 sticky top-[61px] z-20">
-      {/* <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-7">
-        {user?.profileImageUrl ? (
-          <img
-            src={user?.profileImageUrl || ""}
-            alt="Profile image"
-            className=""
-          />
-        ) : (
-          <CharAvatar
-            fullName={user?.fullName}
-            width = "w-20"
-            height="h-20"
-            style="text-xl"
-          />
-
-          
-        )}
-
-        <h5 className="text-gray-950 font-medium leading-6">{user?.fullName || ""}</h5>
-      </div> */}
-
-      {SIDE_MENU_DATA.map((item, index) => (
+      {SIDE_MENU_DATA.disneyworld.map((item, index) => (
         <button
           key={`menu_${index}`}
           className={`w-full flex items-center gap-4 text-[15px] ${

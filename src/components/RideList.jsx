@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import RideInfoCard from "./RideInfoCard";
-import { PARKS_LIST } from "../util/data";;
-
+import { DISNEY_WORLD_PARKS_LIST } from "../util/data";
+import moment from "moment";
 const ParksList = ({ park }) => {
   const [parkData, setParkData] = useState([]);
   const [operatingRides, setOperatingRides] = useState([]);
   const [closedRides, setClosedRides] = useState([]);
   const [compactView, setCompactView] = useState(false);
+  const [openingTime, setOpeningTime] = useState("");
+  const [closingTime, setClosingTime] = useState("");
   const [filters, setFilters] = useState({
     attractions: true,
     restaurants: true,
@@ -15,55 +17,65 @@ const ParksList = ({ park }) => {
   });
 
   const toggleCompactView = useCallback(() => {
-    localStorage.setItem('compactView', JSON.stringify(!compactView));
+    localStorage.setItem("compactView", JSON.stringify(!compactView));
     setCompactView((prev) => !prev);
   }, [compactView]);
 
   useEffect(() => {
+    console.log(park);
     const closedRidesArray = [];
     const operatingRidesArray = [];
     const parkUrl = park.replace(/\s+/g, "").toLowerCase();
 
-    const compactViewStorage = JSON.parse(localStorage.getItem('compactView'));
+    const compactViewStorage = JSON.parse(localStorage.getItem("compactView"));
     if (compactViewStorage) {
       setCompactView(compactViewStorage);
     }
 
-    axios
-      .get(`http://localhost:8000/disneyworld-${parkUrl}-waittimes`)
-      .then((res) => {
-        const sortedRides = res.data.sort(
-          (a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0)
-        );
-        sortedRides.forEach((ride) => {
-          if (
-            PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name)
-          ) {
-            return; // Skip this ride
-          }
-          if (ride.waitTime === null) {
-            ride.waitTime = 0;
-          }
-          if (ride.status === "Refurbishment" || ride.status === "Closed") {
-            closedRidesArray.push(ride);
-          } else {
-            operatingRidesArray.push(ride);
-          }
-        });
-        setOperatingRides(operatingRidesArray);
-        setClosedRides(closedRidesArray);
-        setParkData(res.data);
+    axios.get(`http://localhost:8000/${parkUrl}-waittimes`).then((res) => {
+      const sortedRides = res.data.sort(
+        (a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0)
+      );
+      sortedRides.forEach((ride) => {
+        if (
+          DISNEY_WORLD_PARKS_LIST.find(
+            (p) => p.name === park
+          )?.ignored.includes(ride.name)
+        ) {
+          return; // Skip this ride
+        }
+        if (ride.waitTime === null) {
+          ride.waitTime = 0;
+        }
+        if (ride.status === "Refurbishment" || ride.status === "Closed") {
+          closedRidesArray.push(ride);
+        } else {
+          operatingRidesArray.push(ride);
+        }
       });
+      setOperatingRides(operatingRidesArray);
+      setClosedRides(closedRidesArray);
+      setParkData(res.data);
+    });
+
+    axios.get(`http://localhost:8000/${parkUrl}-parkhours`).then((res) => {
+      setOpeningTime(moment(res.data[0].openingTime).format("h:mm A"));
+      setClosingTime(moment(res.data[0].closingTime).format("h:mm A"));
+    });
   }, []);
 
   return (
     <div className="container mx-auto">
-      <div className="flex py-6 justify-between items-center">
-        <div className="">
+      <div className="flex flex-wrap py-6 justify-between items-center">
+        <div>
           <h2>{park}</h2>
+          <p>
+            Park Hours: {openingTime} - {closingTime}
+          </p>
         </div>
-        <div className="inline-block align-middle">
-          <label className="inline-flex items-center cursor-pointer">
+  
+        <div className="inline-block align-middle sm:pt-0 pt-4">
+          <label className="inline-flex items-center cursor-pointer 2">
             <input
               type="checkbox"
               value=""
@@ -126,7 +138,13 @@ const ParksList = ({ park }) => {
         <div className="py-2">
           <h3>Open Rides</h3>
         </div>
-        <div className={`grid ${compactView ? "grid-cols-1" : "lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"} gap-4`}>
+        <div
+          className={`grid ${
+            compactView
+              ? "grid-cols-1"
+              : "lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+          } gap-4`}
+        >
           {operatingRides
             .filter(
               (ride) =>
@@ -134,13 +152,24 @@ const ParksList = ({ park }) => {
                 (ride.meta?.type === "RESTAURANT" && filters.restaurants)
             )
             .map((ride) => (
-              <RideInfoCard key={ride.id} ride={ride} compactView={compactView} park={park} />
+              <RideInfoCard
+                key={ride.id}
+                ride={ride}
+                compactView={compactView}
+                park={park}
+              />
             ))}
         </div>
         <div className="py-2">
           <h3 className="mt-4">Closed Rides</h3>
         </div>
-        <div className={`grid ${compactView ? "grid-cols-1" : "lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"} gap-4`}>
+        <div
+          className={`grid ${
+            compactView
+              ? "grid-cols-1"
+              : "lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2"
+          } gap-4`}
+        >
           {closedRides
             .filter(
               (ride) =>
@@ -148,7 +177,12 @@ const ParksList = ({ park }) => {
                 (ride.meta?.type === "RESTAURANT" && filters.restaurants)
             )
             .map((ride) => (
-              <RideInfoCard key={ride.id} ride={ride} compactView={compactView} park={park}/>
+              <RideInfoCard
+                key={ride.id}
+                ride={ride}
+                compactView={compactView}
+                park={park}
+              />
             ))}
         </div>
       </div>
