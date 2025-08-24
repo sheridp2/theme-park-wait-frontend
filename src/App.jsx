@@ -11,23 +11,19 @@ import { AnimalKingdom } from "./pages/Dashboard/AnimalKingdom";
 import HollywoodStudios from "./pages/Dashboard/HollywoodStudios";
 
 function App() {
-
   return (
     <>
-      <div>
-        <Router>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/magickingdom" element={<MagicKingdom />} />
-            <Route path="/epcot" element={<Epcot />} />
-            <Route path="/animalkingdom" element={<AnimalKingdom />} />
-            <Route path="/hollywoodstudios" element={<HollywoodStudios />} />
-          </Routes>
-        </Router>
-      </div>
-     
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/magickingdom" element={<MagicKingdom />} />
+          <Route path="/epcot" element={<Epcot />} />
+          <Route path="/animalkingdom" element={<AnimalKingdom />} />
+          <Route path="/hollywoodstudios" element={<HollywoodStudios />} />
+        </Routes>
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

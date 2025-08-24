@@ -20,7 +20,17 @@ const Navbar = ({ activeMenu }) => {
         )}
       </button>
 
-      <h2 className="text-lg font-medium text-black">Theme Park Wait Times</h2>
+      <div className="flex flex-1 items-center justify-between">
+        <h2 className="sm:text-3xl text-xl font-medium text-black">
+          Theme Park Wait Times
+        </h2>
+        {/* <button
+          type="button"
+          class="text-white  bg-primary hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        >
+          Login
+        </button> */}
+      </div>
       {openSideMenu && (
         <div className="fixed top-[61px] -ml-4 bg-white">
           <SideMenu activeMenu={activeMenu} />
