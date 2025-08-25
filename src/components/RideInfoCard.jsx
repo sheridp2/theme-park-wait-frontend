@@ -19,7 +19,12 @@ const RideInfoCard = ({ ride, compactView }) => {
                 RESTAURANT
               </span>
             )}
-            {/* Image or video */}
+            {ride.meta?.type === "STORE" && (
+              <span className="absolute top-2 left-2 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded shadow">
+                STORE
+              </span>
+            )}
+            
             {rideMP4.disneyworld[ride.name] ? (
               <video
                 className="w-full h-32 sm:h-48 object-cover"

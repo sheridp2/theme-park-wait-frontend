@@ -50,7 +50,7 @@ export default function SignUp() {
       if(token){
         localStorage.setItem("token", token)
         updateUser(user);
-        navigate("/dashboard");
+        navigate("/");
       }
 
     } catch (error) {

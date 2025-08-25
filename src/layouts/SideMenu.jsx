@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { SIDE_MENU_DATA } from "../util/data";
 
 const SideMenu = ({ activeMenu }) => {
-  // const { user, clearUser } = useContext(UserContext);
+  const { user, clearUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -19,14 +19,15 @@ const SideMenu = ({ activeMenu }) => {
   };
 
   const handleLogout = () => {
-    toast.success("Succcessfully logged out");
+    toast.success("Successfully logged out");
     localStorage.clear();
-    // clearUser();
+    clearUser();
     navigate("/login");
   };
 
   return (
     <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 p-5 sticky top-[61px] z-20">
+      {user && <p>Hello {user?.fullName}</p>}
       {SIDE_MENU_DATA.main.map((item, index) => (
         <button
           key={`menu_${index}`}

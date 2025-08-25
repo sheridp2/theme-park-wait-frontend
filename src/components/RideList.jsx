@@ -4,7 +4,6 @@ import RideInfoCard from "./RideInfoCard";
 import { DISNEY_WORLD_PARKS_LIST, DISNEYLAND_PARKS_LIST } from "../util/data";
 import moment from "moment";
 const ParksList = ({ park }) => {
-  const [parkData, setParkData] = useState([]);
   const [operatingRides, setOperatingRides] = useState([]);
   const [closedRides, setClosedRides] = useState([]);
   const [compactView, setCompactView] = useState(false);
@@ -23,6 +22,8 @@ const ParksList = ({ park }) => {
   }, [compactView]);
 
   useEffect(() => {
+ 
+    
     const closedRidesArray = [];
     const operatingRidesArray = [];
     const parkUrl = park.replace(/\s+/g, "").toLowerCase();
@@ -59,7 +60,6 @@ const ParksList = ({ park }) => {
       });
       setOperatingRides(operatingRidesArray);
       setClosedRides(closedRidesArray);
-      setParkData(res.data);
     });
 
     axios.get(`http://localhost:8000/waittimes/${parkUrl}-parkhours`).then((res) => {

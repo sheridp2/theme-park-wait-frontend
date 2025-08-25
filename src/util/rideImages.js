@@ -88,6 +88,8 @@ export const rideImages = {
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/animal-kingdom/creature-comforts/creature-comforts-16x9.jpg",
     "Crêpes À Emporter by La Crêperie de Paris":
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-springs/WDW_EPCOT_CrepesAEmporter_Group02_9x16_DH-16x9.jpg",
+    "Davy Crockett's Explorer Canoes":
+      "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/dlr/parks-and-tickets/attractions/disneyland/davy-crocketts-explorer-canoes/davy-crocketts-explorer-canoes-00.jpg",
     "Dawa Bar":
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/animal-kingdom/dawa-bar/dawa-bar-gallery03.jpg",
     "Dino-Sue":
@@ -288,6 +290,8 @@ export const rideImages = {
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/things-to-do/dining/epcot/rose-and-crown-pub-and-dining-room/rose-and-crown-pub-and-dining-room-00.jpg",
     "Roundup Rodeo BBQ":
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/dining/roundup-rodeo-bbq/Recco_1-16x9.jpg",
+    "Sailing Ship Columbia":
+      "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/dlr/parks-and-tickets/attractions/disneyland/sailing-ship-columbia/sailing-ship-columbia-00.jpg",
     "Sci-Fi Dine-In Theater Restaurant":
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/dining/hollywood-studios/sci-fi-dine-in-theater/sci-fi-dine-in-theater-gallery02.jpg",
     "SeaBase Aquarium":
