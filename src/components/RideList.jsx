@@ -91,7 +91,7 @@ const ParksList = ({ park }) => {
         </div>
       </div>
       <div className="mb-4 flex gap-4">
-        <ul className="items-center w-sm text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        <ul className="items-center text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
             <div className="flex items-center ps-3">
               <input
@@ -106,7 +106,7 @@ const ParksList = ({ park }) => {
               />
               <label
                 htmlFor="vue-checkbox-list"
-                className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="w-full py-3 mx-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 ATTRACTIONS
               </label>
@@ -126,7 +126,7 @@ const ParksList = ({ park }) => {
               />
               <label
                 htmlFor="react-checkbox-list"
-                className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="w-full py-3 mx-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 RESTAURANTS
               </label>
@@ -156,7 +156,6 @@ const ParksList = ({ park }) => {
                 key={ride.id}
                 ride={ride}
                 compactView={compactView}
-                park={park}
               />
             ))}
         </div>
@@ -181,7 +180,6 @@ const ParksList = ({ park }) => {
                 key={ride.id}
                 ride={ride}
                 compactView={compactView}
-                park={park}
               />
             ))}
         </div>

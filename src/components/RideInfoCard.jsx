@@ -3,11 +3,11 @@ import { rideImages, rideMP4 } from "../util/rideImages";
 import moment from "moment";
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 
-const RideInfoCard = ({ ride, compactView, park }) => {
+const RideInfoCard = ({ ride, compactView }) => {
   return (
-    <div className="">
+    <>
       {!compactView ? (
-        <div className="rounded overflow-hidden shadow-lg">
+        <div className="rounded overflow-hidden shadow-lg  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
           <div className="relative">
             {ride.meta?.type === "ATTRACTION" && (
               <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded shadow">
@@ -37,7 +37,7 @@ const RideInfoCard = ({ ride, compactView, park }) => {
             )}
           </div>
           <div className="px-3 py-3 sm:px-6 sm:py-6">
-            <div className="font-bold text-base  mb-1 sm:mb-2">{ride.name}</div>
+            <div className="font-bold text-base  mb-1 sm:mb-2 dark:text-white">{ride.name}</div>
             {ride.status === "Down" ? (
               <div
                 className="flex items-center p-4 mt-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
@@ -60,7 +60,7 @@ const RideInfoCard = ({ ride, compactView, park }) => {
             ) : (
               <div>
                 {ride.status !== "Closed" && (
-                  <p className="text-gray-700 text-base">
+                  <p className="text-gray-700 text-base dark:text-white">
                     Wait time: {ride.waitTime} mins
                   </p>
                 )}
@@ -168,7 +168,7 @@ const RideInfoCard = ({ ride, compactView, park }) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

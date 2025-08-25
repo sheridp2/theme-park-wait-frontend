@@ -16,6 +16,7 @@
   body{
     background-color: #fcfbfc;
     overflow-x: hidden;
+    @apply dark:bg-gray-500
   }
 
   h2{
