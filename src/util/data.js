@@ -1,8 +1,10 @@
 import { LuCastle } from "react-icons/lu";
 import { ImSphere } from "react-icons/im";
-import { GiElephant } from "react-icons/gi";
+import { GiElephant, GiCastle } from "react-icons/gi";
 import { FaHotel } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
+import { TbRollercoaster } from "react-icons/tb";
+
 
 export const SIDE_MENU_DATA = {
   main: [
@@ -39,6 +41,20 @@ export const SIDE_MENU_DATA = {
       path: "/hollywoodstudios",
     },
   ],
+  disneyland: [
+    {
+      id: "06",
+      label: "Disneyland",
+      icon: GiCastle,
+      path: "/disneyland",
+    },
+    {
+      id: "07",
+      label: "California Adventure",
+      icon: TbRollercoaster,
+      path: "/californiaadventure",
+    },
+  ],
 };
 
 export const DISNEY_WORLD_PARKS_LIST = [
@@ -54,6 +70,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
       "Casey Jr. Splash 'N' Soak Station",
       "Allergy-Friendly Trick-or-Treat Experience at Mickey's Not-So-Scary Halloween Party",
     ],
+    stores: [],
   },
   {
     id: "02",
@@ -63,6 +80,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
     hoursUrl: "epcot-parkhours",
     waitTimesUrl: "epcot-waittimes",
     ignored: ["GRAB-N-GOOF"],
+    stores: [],
   },
   {
     id: "03",
@@ -72,6 +90,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
     hoursUrl: "animalkingdom-parkhours",
     waitTimesUrl: "animalkingdom-waittimes",
     ignored: [],
+    stores: [],
   },
   {
     id: "04",
@@ -81,5 +100,21 @@ export const DISNEY_WORLD_PARKS_LIST = [
     hoursUrl: "hollywoodstudios-parkhours",
     waitTimesUrl: "hollywoodstudios-waittimes",
     ignored: [],
+    stores: [],
   },
 ];
+
+export const DISNEYLAND_PARKS_LIST = [
+  {
+    id: "05",
+    name: "Disneyland",
+    image:
+      "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1349/464/75/dam/disneyland/attractions/disneyland/sleeping-beauty-castle-walkthrough/sleeping-beauty-castle-exterior-16x9.jpg",
+    hoursUrl: "disneyland-parkhours",
+    waitTimesUrl: "disneyland-waittimes",
+    ignored: [],
+    stores: ["Pooh Corner"],
+  },
+]
+
+

@@ -6,17 +6,32 @@ import moment from "moment"; // Add this import
 const ParkCard = ({ park }) => {
   const [openingTime, setOpeningTime] = useState("");
   const [closingTime, setClosingTime] = useState("");
+  const [specialEvent, setSpecialEvent] = useState({
+    openingTime: "",
+    closingTime: "",
+    type: null,
+  });
+
   const parkUrl = park.name.replace(/\s+/g, '').toLowerCase();
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/${park.hoursUrl}`).then((res) => {
+    axios.get(`http://localhost:8000/waittimes/${park.hoursUrl}`).then((res) => {
       setOpeningTime(
         moment(res.data[0].openingTime).format("h:mm A")
       );
       setClosingTime(
         moment(res.data[0].closingTime).format("h:mm A")
       );
-      
+      const specialEventObj = res.data[0]?.special?.find(
+        (event) => event.description === "Early Entry"
+      );
+      if (specialEventObj) {
+        setSpecialEvent({
+          openingTime: moment(specialEventObj.openingTime).format("h:mm A"),
+          closingTime: moment(specialEventObj.closingTime).format("h:mm A"),
+          type: specialEventObj.description,
+        });
+      }
     });
   }, []);
 
@@ -37,11 +52,18 @@ const ParkCard = ({ park }) => {
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {park.name}
           </h5>
-          <div className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          <div className="mb-3 font-normal">
             <p>
               Park Hours: {openingTime} - {closingTime}
             </p>
           </div>
+          {specialEvent.type && (
+            <div>
+              <p>
+                {specialEvent.type}: {specialEvent.openingTime} - {specialEvent.closingTime}
+              </p>
+            </div>
+          )}
         </div>
       </Link>
     </div>

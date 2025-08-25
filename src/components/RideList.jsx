@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import RideInfoCard from "./RideInfoCard";
-import { DISNEY_WORLD_PARKS_LIST } from "../util/data";
+import { DISNEY_WORLD_PARKS_LIST, DISNEYLAND_PARKS_LIST } from "../util/data";
 import moment from "moment";
 const ParksList = ({ park }) => {
   const [parkData, setParkData] = useState([]);
@@ -13,6 +13,7 @@ const ParksList = ({ park }) => {
   const [filters, setFilters] = useState({
     attractions: true,
     restaurants: true,
+    store: true,
     // add more filters here
   });
 
@@ -22,7 +23,6 @@ const ParksList = ({ park }) => {
   }, [compactView]);
 
   useEffect(() => {
-    console.log(park);
     const closedRidesArray = [];
     const operatingRidesArray = [];
     const parkUrl = park.replace(/\s+/g, "").toLowerCase();
@@ -32,18 +32,22 @@ const ParksList = ({ park }) => {
       setCompactView(compactViewStorage);
     }
 
-    axios.get(`http://localhost:8000/${parkUrl}-waittimes`).then((res) => {
+    axios.get(`http://localhost:8000/waittimes/${parkUrl}-waittimes`).then((res) => {
       const sortedRides = res.data.sort(
         (a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0)
       );
       sortedRides.forEach((ride) => {
         if (
-          DISNEY_WORLD_PARKS_LIST.find(
-            (p) => p.name === park
-          )?.ignored.includes(ride.name)
+          DISNEY_WORLD_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name) ||
+          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name)
+        ) return; // Skip this ride
+        if (
+          DISNEY_WORLD_PARKS_LIST.find((p) => p.name === park)?.stores.includes(ride.name) ||
+          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.stores.includes(ride.name)
         ) {
-          return; // Skip this ride
+          ride.meta.type = "STORE";
         }
+
         if (ride.waitTime === null) {
           ride.waitTime = 0;
         }
@@ -58,7 +62,7 @@ const ParksList = ({ park }) => {
       setParkData(res.data);
     });
 
-    axios.get(`http://localhost:8000/${parkUrl}-parkhours`).then((res) => {
+    axios.get(`http://localhost:8000/waittimes/${parkUrl}-parkhours`).then((res) => {
       setOpeningTime(moment(res.data[0].openingTime).format("h:mm A"));
       setClosingTime(moment(res.data[0].closingTime).format("h:mm A"));
     });
@@ -99,14 +103,14 @@ const ParksList = ({ park }) => {
                 onChange={(e) =>
                   setFilters({ ...filters, attractions: e.target.checked })
                 }
-                id="vue-checkbox-list"
+                id="attractions-checkbox-list"
                 type="checkbox"
                 value=""
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               />
               <label
-                htmlFor="vue-checkbox-list"
-                className="w-full py-3 mx-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="attractions-checkbox-list"
+                className="min-w-[120px] py-3 mx-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 ATTRACTIONS
               </label>
@@ -119,16 +123,36 @@ const ParksList = ({ park }) => {
                 onChange={(e) =>
                   setFilters({ ...filters, restaurants: e.target.checked })
                 }
-                id="react-checkbox-list"
+                id="restaurants-checkbox-list"
                 type="checkbox"
                 value=""
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
               />
               <label
-                htmlFor="react-checkbox-list"
-                className="w-full py-3 mx-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                htmlFor="restaurants-checkbox-list"
+                className="min-w-[120px] py-3 mx-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 RESTAURANTS
+              </label>
+            </div>
+          </li>
+          <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 min-w">
+            <div className="flex items-center ps-3 min-w">
+              <input
+                checked={filters.store}
+                onChange={(e) =>
+                  setFilters({ ...filters, store: e.target.checked })
+                }
+                id="store-checkbox-list"
+                type="checkbox"
+                value=""
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+              />
+              <label
+                htmlFor="store-checkbox-list"
+                className="min-w-[120px] py-3 mx-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                STORE
               </label>
             </div>
           </li>
@@ -149,7 +173,8 @@ const ParksList = ({ park }) => {
             .filter(
               (ride) =>
                 (ride.meta?.type === "ATTRACTION" && filters.attractions) ||
-                (ride.meta?.type === "RESTAURANT" && filters.restaurants)
+                (ride.meta?.type === "RESTAURANT" && filters.restaurants) ||
+                (ride.meta?.type === "STORE" && filters.store)
             )
             .map((ride) => (
               <RideInfoCard
@@ -173,7 +198,8 @@ const ParksList = ({ park }) => {
             .filter(
               (ride) =>
                 (ride.meta?.type === "ATTRACTION" && filters.attractions) ||
-                (ride.meta?.type === "RESTAURANT" && filters.restaurants)
+                (ride.meta?.type === "RESTAURANT" && filters.restaurants)||
+                (ride.meta?.type === "STORE" && filters.store)
             )
             .map((ride) => (
               <RideInfoCard
