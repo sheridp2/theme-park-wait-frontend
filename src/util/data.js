@@ -4,9 +4,10 @@ import { GiElephant, GiCastle } from "react-icons/gi";
 import { FaHotel } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
 import { TbRollercoaster } from "react-icons/tb";
-
+import { FaUser } from "react-icons/fa";
 
 export const SIDE_MENU_DATA = {
+  
   main: [
     {
       id: "01",
@@ -15,27 +16,35 @@ export const SIDE_MENU_DATA = {
       path: "/",
     },
   ],
-  disneyworld: [
+  user:[
     {
       id: "02",
+      label: "User Page",
+      icon: FaUser,
+      path: "/user",
+    },
+  ],
+  disneyworld: [
+    {
+      id: "03",
       label: "Magic Kingdom",
       icon: LuCastle,
       path: "/magickingdom",
     },
     {
-      id: "03",
+      id: "04",
       label: "Epcot",
       icon: ImSphere,
       path: "/epcot",
     },
     {
-      id: "04",
+      id: "05",
       label: "Animal Kingdom",
       icon: GiElephant,
       path: "/animalkingdom",
     },
     {
-      id: "05",
+      id: "06",
       label: "Hollywood Studios",
       icon: FaHotel,
       path: "/hollywoodstudios",
@@ -43,13 +52,13 @@ export const SIDE_MENU_DATA = {
   ],
   disneyland: [
     {
-      id: "06",
+      id: "07",
       label: "Disneyland",
       icon: GiCastle,
       path: "/disneyland",
     },
     {
-      id: "07",
+      id: "08",
       label: "California Adventure",
       icon: TbRollercoaster,
       path: "/californiaadventure",

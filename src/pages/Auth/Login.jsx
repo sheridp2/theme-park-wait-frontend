@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../../components/Inputs/Input";
 
@@ -55,6 +55,13 @@ export default function Login() {
       }
     }
   };
+
+  useEffect(() => {
+    let isAuth = localStorage.getItem('token')
+   if(isAuth && isAuth !== 'undefined') {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <AuthLayout>

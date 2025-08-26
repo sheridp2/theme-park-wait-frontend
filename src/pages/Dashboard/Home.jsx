@@ -5,6 +5,7 @@ import { useUserAuth } from "../../hooks/useUserAuth";
 
 const Home = () => {
   useUserAuth();
+
   return (
     <DashboardLayout activeMenu="Home Page">
       <ParksList />

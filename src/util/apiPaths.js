@@ -6,4 +6,9 @@ export const API_PATHS = {
     REGISTER: "/auth/register",
     GET_USER_INFO: "/auth/getUser",
   },
-}
+  TRIP: {
+    ADD_TRIP: "/trip/add",
+    GET_ALL_TRIPS: "/trip/getAll",
+    DELETE_TRIP: "/trip/delete",
+  }
+};

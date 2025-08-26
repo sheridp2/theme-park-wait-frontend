@@ -15,25 +15,49 @@ const ParkCard = ({ park }) => {
   const parkUrl = park.name.replace(/\s+/g, '').toLowerCase();
 
   useEffect(() => {
+    const data = localStorage.getItem(`park.${park.name}.hours`);
+    if (data) {
+      const { openingTime, closingTime, expiresAt, specialEvent } = JSON.parse(data);
+      if (expiresAt && Date.now() < expiresAt) {
+        setOpeningTime(openingTime);
+        setClosingTime(closingTime);
+        setSpecialEvent(specialEvent);
+        return;
+      } else {
+        localStorage.removeItem(`park.${park.name}.hours`);
+      }
+    }
     axios.get(`http://localhost:8000/waittimes/${park.hoursUrl}`).then((res) => {
-      setOpeningTime(
-        moment(res.data[0].openingTime).format("h:mm A")
-      );
-      setClosingTime(
-        moment(res.data[0].closingTime).format("h:mm A")
-      );
+      const formattedOpening = moment(res.data[0].openingTime).format("h:mm A");
+      const formattedClosing = moment(res.data[0].closingTime).format("h:mm A");
+      setOpeningTime(formattedOpening);
+      setClosingTime(formattedClosing);
       const specialEventObj = res.data[0]?.special?.find(
         (event) => event.description === "Early Entry"
       );
+      
       if (specialEventObj) {
-        setSpecialEvent({
+        const newSpecialEvent = {
           openingTime: moment(specialEventObj.openingTime).format("h:mm A"),
           closingTime: moment(specialEventObj.closingTime).format("h:mm A"),
           type: specialEventObj.description,
-        });
+        };
+        setSpecialEvent(newSpecialEvent);
+        setLocalStorageData(park.name, formattedOpening, formattedClosing, newSpecialEvent);
       }
     });
   }, []);
+
+
+  const setLocalStorageData = (parkName, openingTime, closingTime, specialEvent) => {
+    const data = {
+      openingTime,
+      closingTime,
+      specialEvent,
+      expiresAt: Date.now() + 60 * 60 * 1000, // 1 hour from now
+    };
+    localStorage.setItem(`park.${parkName}.hours`, JSON.stringify(data));
+  };
 
   return (
     <div>

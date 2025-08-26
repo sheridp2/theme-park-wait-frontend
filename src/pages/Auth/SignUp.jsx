@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Input from "../../components/Inputs/Input";
 
@@ -13,9 +13,16 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const {updateUser} = useContext(UserContext)
+  const { updateUser } = useContext(UserContext);
 
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    let isAuth = localStorage.getItem("token");
+    if (isAuth && isAuth !== "undefined") {
+      navigate("/");
+    }
+  }, []);
 
   const navigate = useNavigate();
   const handleSignUp = async (e) => {
@@ -43,21 +50,20 @@ export default function SignUp() {
         fullName,
         email,
         password,
-      })
+      });
 
       const { token, user } = response.data;
 
-      if(token){
-        localStorage.setItem("token", token)
+      if (token) {
+        localStorage.setItem("token", token);
         updateUser(user);
         navigate("/");
       }
-
     } catch (error) {
-      if( error.response && error.response.data.message) {
-        setError(error.response.data.message)
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
       } else {
-        setError(" Something went wrong. Please try again.")
+        setError(" Something went wrong. Please try again.");
       }
     }
   };
@@ -71,7 +77,6 @@ export default function SignUp() {
         </p>
 
         <form onSubmit={handleSignUp}>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
               value={fullName}

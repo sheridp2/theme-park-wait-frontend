@@ -14,6 +14,7 @@ import CaliforniaAdventure from "./pages/Disneyland/CaliforniaAdventure";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
 import UserProvider from "./context/userContext";
+import User from "./pages/Dashboard/User";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/user" element={<User />} />
           <Route path="/login" exact element={<Login />} />
           <Route path="/signup" exact element={<SignUp />} />
           <Route path="/magickingdom" element={<MagicKingdom />} />
