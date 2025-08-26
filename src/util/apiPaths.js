@@ -9,6 +9,6 @@ export const API_PATHS = {
   TRIP: {
     ADD_TRIP: "/trip/add",
     GET_ALL_TRIPS: "/trip/getAll",
-    DELETE_TRIP: "/trip/delete",
+    DELETE_TRIP: (tripId) => `/trip/delete/${tripId}`,
   }
 };

@@ -7,6 +7,7 @@ import axiosInstance from "../../util/axiosInstance";
 import { API_PATHS } from "../../util/apiPaths";
 import toast from "react-hot-toast";
 import TripList from "../../components/Other/TripList";
+import DeleteAlert from "../../components/Other/DeleteAlert";
 
 const UserPage = ({ user }) => {
   useUserAuth();
@@ -52,6 +53,19 @@ const UserPage = ({ user }) => {
     }
   };
 
+  const deleteTrip = async (id) => {
+    try {
+      await axiosInstance.delete(API_PATHS.TRIP.DELETE_TRIP(id));
+      setOpenDeleteAlert({ show: false, data: null });
+      fetchAllTrips();
+    } catch (error) {
+      console.error(
+        "Error deleting trip: ",
+        error.response?.data?.message || error.message
+      );
+    }
+  };
+
   useEffect(() => {
     fetchAllTrips();
 
@@ -76,8 +90,13 @@ const UserPage = ({ user }) => {
           <h4 className="ml-2">Add trip</h4>
         </button>
       </div>
-      <div>
-        <TripList trips={tripData} />
+      <div className="flex  my-6 py-6">
+        <TripList
+          trips={tripData}
+          onDelete={(id, tripName) => {
+            setOpenDeleteAlert({ show: true, data: id, tripName: tripName });
+          }}
+        />
       </div>
       <Modal
         isOpen={openAddTripModal}
@@ -85,6 +104,19 @@ const UserPage = ({ user }) => {
         title="Add New Trip"
       >
         <AddTripForm handleAddTrip={handleAddTrip} />
+      </Modal>
+
+      <Modal
+        isOpen={openDeleteAlert.show}
+        onClose={() =>
+          setOpenDeleteAlert({ show: false, data: null, tripName: null })
+        }
+        title="Delete Trip"
+      >
+        <DeleteAlert
+          content={`Are you sure you want to delete "${openDeleteAlert.tripName}" from upcoming trips?`}
+          onDelete={() => deleteTrip(openDeleteAlert.data)}
+        />
       </Modal>
     </div>
   );

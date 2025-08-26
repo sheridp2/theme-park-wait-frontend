@@ -1,14 +1,11 @@
 import React from 'react'
+import TripCard from '../Cards/TripCard'
 
-const TripList = ({ trips }) => {
+const TripList = ({ trips, onDelete }) => {
   return (
     <div>
       {trips.map(trip => (
-        <div key={trip._id}>
-          <h3>{trip.tripName}</h3>
-          <p>{trip.park}</p>
-          <p>{trip.startDate} - {trip.endDate}</p>
-        </div>
+      <TripCard key={trip._id} trip={trip} onDelete={() => onDelete(trip._id, trip.tripName)} />
       ))}
     </div>
   )
