@@ -22,8 +22,6 @@ const ParksList = ({ park }) => {
   }, [compactView]);
 
   useEffect(() => {
- 
-    
     const closedRidesArray = [];
     const operatingRidesArray = [];
     const parkUrl = park.replace(/\s+/g, "").toLowerCase();
@@ -38,10 +36,14 @@ const ParksList = ({ park }) => {
         (a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0)
       );
       sortedRides.forEach((ride) => {
+        console.log(ride.id)
         if (
           DISNEY_WORLD_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name) ||
-          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name)
-        ) return; // Skip this ride
+          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name) ||
+          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.id)
+        ) {
+          return;
+        } // Skip this ride
         if (
           DISNEY_WORLD_PARKS_LIST.find((p) => p.name === park)?.stores.includes(ride.name) ||
           DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.stores.includes(ride.name)

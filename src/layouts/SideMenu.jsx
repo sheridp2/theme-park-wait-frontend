@@ -4,6 +4,7 @@ import { UserContext } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { SIDE_MENU_DATA } from "../util/data";
+import { FaUser } from "react-icons/fa";
 
 const SideMenu = ({ activeMenu }) => {
   const { user, clearUser } = useContext(UserContext);
@@ -27,8 +28,7 @@ const SideMenu = ({ activeMenu }) => {
 
   return (
     <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 p-5 sticky top-[61px] z-20">
-      {user && <p>Hello {user?.fullName}</p>}
-      {SIDE_MENU_DATA.main.map((item, index) => (
+      {SIDE_MENU_DATA.main.map((item, index) => ( 
         <button
           key={`menu_${index}`}
           className={`w-full flex items-center gap-4 text-[15px] ${
@@ -37,11 +37,12 @@ const SideMenu = ({ activeMenu }) => {
           onClick={() => handleClick(item.path)}
         >
           <item.icon className="text-xl" />
-          {item.label === "User Page" && user ? `${user.fullName}'s Page` : item.label}
+          {item.label}
         </button>
       ))}
-      {user && (
-        SIDE_MENU_DATA.user.map((item, index) => (
+
+      {user ? (
+           SIDE_MENU_DATA.user.map((item, index) => (
           <button
             key={`menu_${index}`}
             className={`w-full flex items-center gap-4 text-[15px] ${
@@ -53,7 +54,18 @@ const SideMenu = ({ activeMenu }) => {
             {item.label === "User Page" && user ? `${user.fullName}'s Page` : item.label}
           </button>
         ))
-      )}
+        ) : (
+          <button
+            type="button"
+            className="w-full flex items-center gap-4 text-[15px] py-3 px-6 rounded-lg mb-3"
+            onClick={() => navigate("/login")}
+          >
+            <FaUser className="text-xl" />
+            User Page
+          </button>
+          
+        )}
+
 
       <h4 className="text-md font-semibold mb-4 pt-4">Disney World</h4>
       {SIDE_MENU_DATA.disneyworld.map((item, index) => (

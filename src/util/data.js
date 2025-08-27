@@ -121,8 +121,19 @@ export const DISNEYLAND_PARKS_LIST = [
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1349/464/75/dam/disneyland/attractions/disneyland/sleeping-beauty-castle-walkthrough/sleeping-beauty-castle-exterior-16x9.jpg",
     hoursUrl: "disneyland-parkhours",
     waitTimesUrl: "disneyland-waittimes",
-    ignored: [],
+    ignored: ["Galactic Grill’s Seasonal Novelty Release", "Troubadour Tavern's Seasonal Novelty Release", "Hungry Bear Barbecue Jamboree’s Seasonal Novelty Release"],
     stores: ["Pooh Corner"],
+  },
+
+  {
+    id: "06",
+    name: "California Adventure",
+    image:
+      "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1349/464/75/dam/disneyland/attractions/disneyland/sleeping-beauty-castle-walkthrough/sleeping-beauty-castle-exterior-16x9.jpg",
+    hoursUrl: "californiaadventure-parkhours",
+    waitTimesUrl: "californiaadventure-waittimes",
+    ignored: ["Hollywood Land’s Seasonal Novelty Release", "Paradise Gardens’ Seasonal Novelty Release", "Cozy Cone Motel 5 - Popcone ", "DisneylandResortCaliforniaAdventure_dc2e7388-5618-4fe3-8287-096270978829"],
+    stores: ["Trolley Treats", "Bing Bong's Sweet Stuff", ""],
   },
 ]
 

@@ -25,16 +25,22 @@ const UserPage = ({ user }) => {
     if (loading) return;
     const response = await axiosInstance.get(`${API_PATHS.TRIP.GET_ALL_TRIPS}`);
     try {
-      setTripData(response.data);
+      // Sort trips by startDate ascending (soonest first)
+      const sortedTrips = response.data.sort(
+        (a, b) => new Date(a.startDate) - new Date(b.startDate)
+      );
+      setTripData(sortedTrips);
     } catch (error) {
       console.log("Something went wrong. Try again", error);
     } finally {
       setLoading(false);
+      console.log(tripData)
     }
   };
 
   const handleAddTrip = async (tripData) => {
     const { tripName, park, startDate, endDate } = tripData;
+    setLoading
     try {
       await axiosInstance.post(API_PATHS.TRIP.ADD_TRIP, {
         tripName,
@@ -50,6 +56,10 @@ const UserPage = ({ user }) => {
         "Error adding trip:",
         error.response?.data?.message || error.message
       );
+    }
+    finally {
+
+      setLoading(false);
     }
   };
 
@@ -72,12 +82,19 @@ const UserPage = ({ user }) => {
     return () => {};
   }, []);
 
+  const daysTillTrip = (tripDate) => {
+    const today = new Date();
+    const trip = new Date(tripDate);
+    const diffTime = trip - today;
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  };
+
   return (
     <div className="container mx-auto">
       <div className="flex flex-wrap py-6 justify-between items-center">
         <div>
           <h2>Welcome back, {user?.fullName}!</h2>
-          <p>Only 345 days till you trip to Disneyland!</p>
+          <p>Only {daysTillTrip(tripData[0]?.startDate)} days till you trip to {tripData[0]?.park}!</p>
         </div>
       </div>
       <div>
@@ -90,7 +107,7 @@ const UserPage = ({ user }) => {
           <h4 className="ml-2">Add trip</h4>
         </button>
       </div>
-      <div className="flex  my-6 py-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
         <TripList
           trips={tripData}
           onDelete={(id, tripName) => {

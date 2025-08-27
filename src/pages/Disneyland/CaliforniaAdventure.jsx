@@ -4,8 +4,8 @@ import RideList from "../../components/RideList";
 
 const CaliforniaAdventure = () => {
   return (
-    <DashboardLayout activeMenu="CaliforniaAdventure">
-      <RideList park={"CaliforniaAdventure"}/>
+    <DashboardLayout activeMenu="California Adventure">
+      <RideList park={"California Adventure"}/>
     </DashboardLayout>
   )
 }
