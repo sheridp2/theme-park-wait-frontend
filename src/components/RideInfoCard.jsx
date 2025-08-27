@@ -70,7 +70,7 @@ const RideInfoCard = ({ ride, compactView }) => {
                   </p>
                 )}
                 {ride.meta?.returnTime?.state === "AVAILABLE" && (
-                  <p>
+                  <p className="dark:text-white">
                     Return time:
                     <span className="text-green-500">
                       {" "}

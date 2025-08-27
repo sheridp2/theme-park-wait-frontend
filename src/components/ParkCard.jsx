@@ -141,13 +141,13 @@ const ParkCard = ({ park }) => {
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {park.name}
           </h5>
-          <div className="mb-3 font-normal">
+          <div className="mb-3 font-normal dark:text-white">
             <p>
               Park Hours: {openingTime} - {closingTime}
             </p>
           </div>
           {earlyEntry.type && (
-            <div className="mb-3 font-normal">
+            <div className="mb-3 font-normal dark:text-white">
               <p>
                 {earlyEntry.type}: {earlyEntry.openingTime} -{" "}
                 {earlyEntry.closingTime}
@@ -155,7 +155,7 @@ const ParkCard = ({ park }) => {
             </div>
           )}
           {specialEvent.type && (
-            <div className="mb-3 font-normal">
+            <div className="mb-3 font-normal dark:text-white">
               <p>
                 {specialEvent.type}: {specialEvent.openingTime} -{" "}
                 {specialEvent.closingTime}
