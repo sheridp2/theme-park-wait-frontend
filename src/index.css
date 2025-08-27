@@ -51,3 +51,7 @@
 .add-btn-fill {
   @apply text-white bg-primary;
 }
+
+.card-img{
+  height: -webkit-fill-available;
+}

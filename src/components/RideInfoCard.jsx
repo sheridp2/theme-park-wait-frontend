@@ -7,7 +7,7 @@ const RideInfoCard = ({ ride, compactView }) => {
   return (
     <>
       {!compactView ? (
-        <div className="rounded overflow-hidden shadow-lg  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div className="rounded overflow-hidden shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
           <div className="relative">
             {ride.meta?.type === "ATTRACTION" && (
               <span className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded shadow">

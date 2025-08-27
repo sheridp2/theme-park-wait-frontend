@@ -11,7 +11,7 @@ export const SIDE_MENU_DATA = {
   main: [
     {
       id: "01",
-      label: "Home Page",
+      label: "Home",
       icon: IoHome,
       path: "/",
     },
@@ -22,6 +22,12 @@ export const SIDE_MENU_DATA = {
       label: "User Page",
       icon: FaUser,
       path: "/user",
+    },
+    {
+      id: "02",
+      label: "Your Page",
+      icon: FaUser,
+      path: "/login",
     },
   ],
   disneyworld: [
@@ -129,7 +135,7 @@ export const DISNEYLAND_PARKS_LIST = [
     id: "06",
     name: "California Adventure",
     image:
-      "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1349/464/75/dam/disneyland/attractions/disneyland/sleeping-beauty-castle-walkthrough/sleeping-beauty-castle-exterior-16x9.jpg",
+      "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/3840/2160/75/vision-dam/digital/parks-platform/parks-global-assets/disneyland/attractions/pixar-pier/dca-pixar-pier-day-16x9.jpg",
     hoursUrl: "californiaadventure-parkhours",
     waitTimesUrl: "californiaadventure-waittimes",
     ignored: ["Hollywood Land’s Seasonal Novelty Release", "Paradise Gardens’ Seasonal Novelty Release", "Cozy Cone Motel 5 - Popcone ", "DisneylandResortCaliforniaAdventure_dc2e7388-5618-4fe3-8287-096270978829"],

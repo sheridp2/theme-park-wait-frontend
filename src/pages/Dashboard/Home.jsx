@@ -7,7 +7,7 @@ const Home = () => {
   useUserAuth();
 
   return (
-    <DashboardLayout activeMenu="Home Page">
+    <DashboardLayout activeMenu="Home">
       <ParksList />
     </DashboardLayout>
   );

@@ -42,26 +42,28 @@ const SideMenu = ({ activeMenu }) => {
       ))}
 
       {user ? (
-           SIDE_MENU_DATA.user.map((item, index) => (
+           
           <button
-            key={`menu_${index}`}
+            
             className={`w-full flex items-center gap-4 text-[15px] ${
-              activeMenu == item.label ? "text-white bg-primary" : ""
+              activeMenu == SIDE_MENU_DATA.user[0].label ? "text-white bg-primary" : ""
             } py-3 px-6 rounded-lg mb-3 `}
-            onClick={() => handleClick(item.path)}
-          >
-            <item.icon className="text-xl" />
-            {item.label === "User Page" && user ? `${user.fullName}'s Page` : item.label}
-          </button>
-        ))
-        ) : (
-          <button
-            type="button"
-            className="w-full flex items-center gap-4 text-[15px] py-3 px-6 rounded-lg mb-3"
-            onClick={() => navigate("/login")}
+            onClick={() => handleClick(SIDE_MENU_DATA.user[0].path)}
           >
             <FaUser className="text-xl" />
-            User Page
+            {SIDE_MENU_DATA.user[0].label === "User Page" && user ? `${user.fullName}'s Page` : SIDE_MENU_DATA.user[0].label}
+          </button>
+      
+        ) : (
+          <button
+            
+            className={`w-full flex items-center gap-4 text-[15px] ${
+              activeMenu == SIDE_MENU_DATA.user[1].label ? "text-white bg-primary" : ""
+            } py-3 px-6 rounded-lg mb-3 `}
+            onClick={() => handleClick(SIDE_MENU_DATA.user[1].path)}
+          >
+            <FaUser className="text-xl" />
+            {SIDE_MENU_DATA.user[1].label === "User Page" && user ? `${user.fullName}'s Page` : SIDE_MENU_DATA.user[0].label}
           </button>
           
         )}

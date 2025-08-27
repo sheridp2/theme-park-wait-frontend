@@ -36,7 +36,6 @@ const ParksList = ({ park }) => {
         (a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0)
       );
       sortedRides.forEach((ride) => {
-        console.log(ride.id)
         if (
           DISNEY_WORLD_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name) ||
           DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name) ||
@@ -161,7 +160,7 @@ const ParksList = ({ park }) => {
         </ul>
       </div>
       <div>
-        <div className="py-2">
+        <div className="py-4">
           <h3>Open Rides</h3>
         </div>
         <div
@@ -186,7 +185,7 @@ const ParksList = ({ park }) => {
               />
             ))}
         </div>
-        <div className="py-2">
+        <div className="py-4">
           <h3 className="mt-4">Closed Rides</h3>
         </div>
         <div
