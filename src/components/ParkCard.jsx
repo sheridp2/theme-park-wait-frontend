@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment"; // Add this import
 import { BASE_URL } from "../util/apiPaths";
+import tz from "moment-timezone";
 
 const ParkCard = ({ park }) => {
   const [openingTime, setOpeningTime] = useState("");
@@ -32,8 +33,8 @@ const ParkCard = ({ park }) => {
 
   const getParkHours = () => {
     axios.get(`${BASE_URL}/waittimes/${park.hoursUrl}`).then((res) => {
-      const formattedOpening = moment(res.data[0].openingTime).format("h:mm A");
-      const formattedClosing = moment(res.data[0].closingTime).format("h:mm A");
+      const formattedOpening = moment(res.data[0].openingTime).tz(park.timezone).format("h:mm A z");
+      const formattedClosing = moment(res.data[0].closingTime).tz(park.timezone).format("h:mm A z");
       setOpeningTime(formattedOpening);
       setClosingTime(formattedClosing);
       setLocalStorageData(
@@ -54,8 +55,8 @@ const ParkCard = ({ park }) => {
       );
       if (specialEventObj) {
         const newSpecialEvent = {
-          openingTime: moment(specialEventObj.openingTime).format("h:mm A"),
-          closingTime: moment(specialEventObj.closingTime).format("h:mm A"),
+          openingTime: moment(specialEventObj.openingTime).tz(park.timezone).format("h:mm A z"),
+          closingTime: moment(specialEventObj.closingTime).tz(park.timezone).format("h:mm A z"),
           type: specialEventObj.description,
         };
         setSpecialEvent(newSpecialEvent);
@@ -69,8 +70,8 @@ const ParkCard = ({ park }) => {
 
       if (earlyEntryObj) {
         const newEarlyEntry = {
-          openingTime: moment(earlyEntryObj.openingTime).format("h:mm A"),
-          closingTime: moment(earlyEntryObj.closingTime).format("h:mm A"),
+          openingTime: moment(earlyEntryObj.openingTime).tz(park.timezone).format("h:mm A z"),
+          closingTime: moment(earlyEntryObj.closingTime).tz(park.timezone).format("h:mm A z"),
           type: earlyEntryObj.description,
         };
         setEarlyEntry(newEarlyEntry);
@@ -130,7 +131,7 @@ const ParkCard = ({ park }) => {
         to={`/${parkUrl}`}
         parkopening={openingTime}
         parkclosing={closingTime}
-        className="flex flex-col xs:items-center rounded-lg md:flex-row md:max-w-xl  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 card-img"
+        className="flex flex-col xs:items-center rounded-lg md:flex-row dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 card-img"
       >
         <img
           className="object-cover w-full rounded-t-lg h-26 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg card-img"

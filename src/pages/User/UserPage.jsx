@@ -34,13 +34,13 @@ const UserPage = ({ user }) => {
       console.log("Something went wrong. Try again", error);
     } finally {
       setLoading(false);
-      console.log(tripData)
+      console.log(tripData);
     }
   };
 
   const handleAddTrip = async (tripData) => {
     const { tripName, park, startDate, endDate } = tripData;
-    setLoading
+    setLoading;
     try {
       await axiosInstance.post(API_PATHS.TRIP.ADD_TRIP, {
         tripName,
@@ -56,9 +56,7 @@ const UserPage = ({ user }) => {
         "Error adding trip:",
         error.response?.data?.message || error.message
       );
-    }
-    finally {
-
+    } finally {
       setLoading(false);
     }
   };
@@ -94,7 +92,12 @@ const UserPage = ({ user }) => {
       <div className="flex flex-wrap py-6 justify-between items-center">
         <div>
           <h2>Welcome back, {user?.fullName}!</h2>
-          <p>Only {daysTillTrip(tripData[0]?.startDate)} days till you trip to {tripData[0]?.park}!</p>
+          {tripData.length > 0 && (
+            <p>
+              Only {daysTillTrip(tripData[0]?.startDate)} days till you trip to{" "}
+              {tripData[0]?.park}!
+            </p>
+          )}
         </div>
       </div>
       <div>

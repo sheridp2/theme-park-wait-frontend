@@ -7,7 +7,6 @@ import { TbRollercoaster } from "react-icons/tb";
 import { FaUser } from "react-icons/fa";
 
 export const SIDE_MENU_DATA = {
-  
   main: [
     {
       id: "01",
@@ -16,7 +15,7 @@ export const SIDE_MENU_DATA = {
       path: "/",
     },
   ],
-  user:[
+  user: [
     {
       id: "02",
       label: "User Page",
@@ -86,6 +85,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
       "Allergy-Friendly Trick-or-Treat Experience at Mickey's Not-So-Scary Halloween Party",
     ],
     stores: [],
+    timezone: "America/New_York",
   },
   {
     id: "02",
@@ -96,6 +96,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
     waitTimesUrl: "epcot-waittimes",
     ignored: ["GRAB-N-GOOF"],
     stores: [],
+    timezone: "America/New_York",
   },
   {
     id: "03",
@@ -106,6 +107,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
     waitTimesUrl: "animalkingdom-waittimes",
     ignored: [],
     stores: [],
+    timezone: "America/New_York",
   },
   {
     id: "04",
@@ -116,6 +118,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
     waitTimesUrl: "hollywoodstudios-waittimes",
     ignored: [],
     stores: [],
+    timezone: "America/New_York",
   },
 ];
 
@@ -127,8 +130,13 @@ export const DISNEYLAND_PARKS_LIST = [
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1349/464/75/dam/disneyland/attractions/disneyland/sleeping-beauty-castle-walkthrough/sleeping-beauty-castle-exterior-16x9.jpg",
     hoursUrl: "disneyland-parkhours",
     waitTimesUrl: "disneyland-waittimes",
-    ignored: ["Galactic Grill’s Seasonal Novelty Release", "Troubadour Tavern's Seasonal Novelty Release", "Hungry Bear Barbecue Jamboree’s Seasonal Novelty Release"],
+    ignored: [
+      "Galactic Grill’s Seasonal Novelty Release",
+      "Troubadour Tavern's Seasonal Novelty Release",
+      "Hungry Bear Barbecue Jamboree’s Seasonal Novelty Release",
+    ],
     stores: ["Pooh Corner"],
+    timezone: "America/Los_Angeles",
   },
 
   {
@@ -138,9 +146,13 @@ export const DISNEYLAND_PARKS_LIST = [
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/3840/2160/75/vision-dam/digital/parks-platform/parks-global-assets/disneyland/attractions/pixar-pier/dca-pixar-pier-day-16x9.jpg",
     hoursUrl: "californiaadventure-parkhours",
     waitTimesUrl: "californiaadventure-waittimes",
-    ignored: ["Hollywood Land’s Seasonal Novelty Release", "Paradise Gardens’ Seasonal Novelty Release", "Cozy Cone Motel 5 - Popcone ", "DisneylandResortCaliforniaAdventure_dc2e7388-5618-4fe3-8287-096270978829"],
-    stores: ["Trolley Treats", "Bing Bong's Sweet Stuff", ""],
+    ignored: [
+      "Hollywood Land’s Seasonal Novelty Release",
+      "Paradise Gardens’ Seasonal Novelty Release",
+      "Cozy Cone Motel 5 - Popcone ",
+      "DisneylandResortCaliforniaAdventure_dc2e7388-5618-4fe3-8287-096270978829",
+    ],
+    stores: ["Trolley Treats", "Bing Bong's Sweet Stuff"],
+    timezone: "America/Los_Angeles",
   },
-]
-
-
+];
