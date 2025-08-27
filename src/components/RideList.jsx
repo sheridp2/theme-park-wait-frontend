@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import RideInfoCard from "./RideInfoCard";
 import { DISNEY_WORLD_PARKS_LIST, DISNEYLAND_PARKS_LIST } from "../util/data";
 import moment from "moment";
+import { BASE_URL } from "../util/apiPaths";
 const ParksList = ({ park }) => {
   const [operatingRides, setOperatingRides] = useState([]);
   const [closedRides, setClosedRides] = useState([]);
@@ -26,26 +27,50 @@ const ParksList = ({ park }) => {
     const operatingRidesArray = [];
     const parkUrl = park.replace(/\s+/g, "").toLowerCase();
 
+    const localStorageData = localStorage.getItem(`park.${parkUrl}.hours`);
+
+    console.log("Local Storage Data:", localStorageData);
+
     const compactViewStorage = JSON.parse(localStorage.getItem("compactView"));
     if (compactViewStorage) {
       setCompactView(compactViewStorage);
     }
 
-    axios.get(`http://localhost:8000/waittimes/${parkUrl}-waittimes`).then((res) => {
+    const setLocalStorageData = (parkName, type, data, expirationTime) => {
+      localStorage.setItem(
+        `park.${parkName}.${type}`,
+        JSON.stringify({
+          ...data,
+          expiresAt: Date.now() + expirationTime,
+        })
+      );
+    };
+
+    axios.get(`${BASE_URL}/waittimes/${parkUrl}-waittimes`).then((res) => {
       const sortedRides = res.data.sort(
         (a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0)
       );
       sortedRides.forEach((ride) => {
         if (
-          DISNEY_WORLD_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name) ||
-          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.name) ||
-          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(ride.id)
+          DISNEY_WORLD_PARKS_LIST.find(
+            (p) => p.name === park
+          )?.ignored.includes(ride.name) ||
+          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(
+            ride.name
+          ) ||
+          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(
+            ride.id
+          )
         ) {
           return;
         } // Skip this ride
         if (
-          DISNEY_WORLD_PARKS_LIST.find((p) => p.name === park)?.stores.includes(ride.name) ||
-          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.stores.includes(ride.name)
+          DISNEY_WORLD_PARKS_LIST.find((p) => p.name === park)?.stores.includes(
+            ride.name
+          ) ||
+          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.stores.includes(
+            ride.name
+          )
         ) {
           ride.meta.type = "STORE";
         }
@@ -63,10 +88,33 @@ const ParksList = ({ park }) => {
       setClosedRides(closedRidesArray);
     });
 
-    axios.get(`http://localhost:8000/waittimes/${parkUrl}-parkhours`).then((res) => {
-      setOpeningTime(moment(res.data[0].openingTime).format("h:mm A"));
-      setClosingTime(moment(res.data[0].closingTime).format("h:mm A"));
-    });
+    if (localStorageData) {
+      const { openingTime, closingTime, expiresAt } =
+        JSON.parse(localStorageData);
+      if (expiresAt && Date.now() < expiresAt) {
+        setOpeningTime(openingTime);
+        setClosingTime(closingTime);
+        return;
+      } else {
+        localStorage.removeItem(`park.${parkUrl}.hours`);
+      }
+    } else {
+      axios.get(`${BASE_URL}/waittimes/${parkUrl}-parkhours`).then((res) => {
+        const formattedOpening = moment(res.data[0].openingTime).format("h:mm A");
+        const formattedClosing = moment(res.data[0].closingTime).format("h:mm A");
+        setOpeningTime(formattedOpening);
+        setClosingTime(formattedClosing);
+        setLocalStorageData(
+        parkUrl,
+        "hours",
+        {
+          openingTime: formattedOpening,
+          closingTime: formattedClosing,
+        },
+        4 * 60 * 60 * 1000
+      );
+      });
+    }
   }, []);
 
   return (
@@ -78,7 +126,7 @@ const ParksList = ({ park }) => {
             Park Hours: {openingTime} - {closingTime}
           </p>
         </div>
-  
+
         <div className="inline-block align-middle sm:pt-0 pt-4">
           <label className="inline-flex items-center cursor-pointer 2">
             <input
@@ -199,7 +247,7 @@ const ParksList = ({ park }) => {
             .filter(
               (ride) =>
                 (ride.meta?.type === "ATTRACTION" && filters.attractions) ||
-                (ride.meta?.type === "RESTAURANT" && filters.restaurants)||
+                (ride.meta?.type === "RESTAURANT" && filters.restaurants) ||
                 (ride.meta?.type === "STORE" && filters.store)
             )
             .map((ride) => (

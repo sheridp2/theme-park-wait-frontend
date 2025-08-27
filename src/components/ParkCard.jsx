@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment"; // Add this import
+import { BASE_URL } from "../util/apiPaths";
 
 const ParkCard = ({ park }) => {
   const [openingTime, setOpeningTime] = useState("");
@@ -17,29 +18,33 @@ const ParkCard = ({ park }) => {
     type: null,
   });
 
-  const parkUrl = park.name.replace(/\s+/g, '').toLowerCase();
+  const parkUrl = park.name.replace(/\s+/g, "").toLowerCase();
 
-  useEffect(() => {
-    const data = localStorage.getItem(`park.${parkUrl}.hours`);
+  const setLocalStorageData = (parkName, type, data, expirationTime) => {
+    localStorage.setItem(
+      `park.${parkName}.${type}`,
+      JSON.stringify({
+        ...data,
+        expiresAt: Date.now() + expirationTime,
+      })
+    );
+  };
 
-    
-    if (data) {
-      const { openingTime, closingTime, expiresAt, specialEvent, earlyEntry } = JSON.parse(data);
-      if (expiresAt && Date.now() < expiresAt) {
-        setOpeningTime(openingTime);
-        setClosingTime(closingTime);
-        setSpecialEvent(specialEvent);
-        setEarlyEntry(earlyEntry);
-        return;
-      } else {
-        localStorage.removeItem(`park.${parkUrl}.hours`);
-      }
-    }
-    axios.get(`http://localhost:8000/waittimes/${park.hoursUrl}`).then((res) => {
+  const getParkHours = () => {
+    axios.get(`${BASE_URL}/waittimes/${park.hoursUrl}`).then((res) => {
       const formattedOpening = moment(res.data[0].openingTime).format("h:mm A");
       const formattedClosing = moment(res.data[0].closingTime).format("h:mm A");
       setOpeningTime(formattedOpening);
       setClosingTime(formattedClosing);
+      setLocalStorageData(
+        parkUrl,
+        "hours",
+        {
+          openingTime: formattedOpening,
+          closingTime: formattedClosing,
+        },
+        4 * 60 * 60 * 1000
+      ); // expires in 4 hours
 
       const specialEventObj = res.data[0]?.special?.find(
         (event) => event.description === "Special Ticketed Event"
@@ -47,7 +52,6 @@ const ParkCard = ({ park }) => {
       const earlyEntryObj = res.data[0]?.special?.find(
         (event) => event.description === "Early Entry"
       );
-      console.log("Special Event Obj:", specialEventObj);
       if (specialEventObj) {
         const newSpecialEvent = {
           openingTime: moment(specialEventObj.openingTime).format("h:mm A"),
@@ -55,6 +59,12 @@ const ParkCard = ({ park }) => {
           type: specialEventObj.description,
         };
         setSpecialEvent(newSpecialEvent);
+        setLocalStorageData(
+          parkUrl,
+          "specialEvent",
+          newSpecialEvent,
+          6 * 60 * 60 * 1000
+        );
       }
 
       if (earlyEntryObj) {
@@ -64,41 +74,55 @@ const ParkCard = ({ park }) => {
           type: earlyEntryObj.description,
         };
         setEarlyEntry(newEarlyEntry);
-      } 
-      setLocalStorageData(
-        park.name,
-        formattedOpening,
-        formattedClosing,
-        specialEventObj
-          ? {
-              openingTime: moment(specialEventObj.openingTime).format("h:mm A"),
-              closingTime: moment(specialEventObj.closingTime).format("h:mm A"),
-              type: specialEventObj.description,
-            }
-          : { openingTime: "", closingTime: "", type: null },
-        earlyEntryObj
-          ? {
-              openingTime: moment(earlyEntryObj.openingTime).format("h:mm A"),
-              closingTime: moment(earlyEntryObj.closingTime).format("h:mm A"),
-              type: earlyEntryObj.description,
-            }
-          : { openingTime: "", closingTime: "", type: null }
-      );
-
+        setLocalStorageData(
+          parkUrl,
+          "earlyEntry",
+          newEarlyEntry,
+          6 * 60 * 60 * 1000
+        );
+      }
     });
-  }, []);
-
-
-  const setLocalStorageData = (parkName, openingTime, closingTime, specialEvent, earlyEntry) => {
-    const data = {
-      openingTime,
-      closingTime,
-      specialEvent,
-      earlyEntry,
-      expiresAt: Date.now() + 60 * 60 * 1000, // 1 hour from now
-    };
-    localStorage.setItem(`park.${parkUrl}.hours`, JSON.stringify(data));
   };
+
+  useEffect(() => {
+    const localStorageDataHours = localStorage.getItem(`park.${parkUrl}.hours`);
+    const localStorageDataSpecialEvent = localStorage.getItem(
+      `park.${parkUrl}.specialEvent`
+    );
+    const localStorageDataEarlyEntry = localStorage.getItem(
+      `park.${parkUrl}.earlyEntry`
+    );
+
+    if (localStorageDataHours) {
+      const { openingTime, closingTime, expiresAt } = JSON.parse(
+        localStorageDataHours
+      );
+      if (expiresAt && Date.now() < expiresAt) {
+        setOpeningTime(openingTime);
+        setClosingTime(closingTime);
+      } else {
+        localStorage.removeItem(`park.${parkUrl}.hours`);
+      }
+    } else {
+      getParkHours();
+    }
+    if (localStorageDataSpecialEvent) {
+      const { openingTime, closingTime, type, expiresAt } = JSON.parse(
+        localStorageDataSpecialEvent
+      );
+      if (expiresAt && Date.now() < expiresAt) {
+        setSpecialEvent({ openingTime, closingTime, type });
+      }
+    }
+    if (localStorageDataEarlyEntry) {
+      const { openingTime, closingTime, type, expiresAt } = JSON.parse(
+        localStorageDataEarlyEntry
+      );
+      if (expiresAt && Date.now() < expiresAt) {
+        setEarlyEntry({ openingTime, closingTime, type });
+      }
+    }
+  }, []);
 
   return (
     <div className="rounded overflow-hidden shadow-lg hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -123,20 +147,21 @@ const ParkCard = ({ park }) => {
             </p>
           </div>
           {earlyEntry.type && (
-           <div className="mb-3 font-normal">
+            <div className="mb-3 font-normal">
               <p>
-                {earlyEntry.type}: {earlyEntry.openingTime} - {earlyEntry.closingTime}
+                {earlyEntry.type}: {earlyEntry.openingTime} -{" "}
+                {earlyEntry.closingTime}
               </p>
             </div>
           )}
           {specialEvent.type && (
             <div className="mb-3 font-normal">
               <p>
-                {specialEvent.type}: {specialEvent.openingTime} - {specialEvent.closingTime}
+                {specialEvent.type}: {specialEvent.openingTime} -{" "}
+                {specialEvent.closingTime}
               </p>
             </div>
           )}
-
         </div>
       </Link>
     </div>
