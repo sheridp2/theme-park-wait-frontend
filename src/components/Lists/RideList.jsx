@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import RideInfoCard from "./RideInfoCard";
-import { DISNEY_WORLD_PARKS_LIST, DISNEYLAND_PARKS_LIST } from "../util/data";
+import { DISNEY_WORLD_PARKS_LIST, DISNEYLAND_PARKS_LIST } from "../../util/data";
 import moment from "moment";
-import { BASE_URL } from "../util/apiPaths";
-const ParksList = ({ park }) => {
+import { BASE_URL } from "../../util/apiPaths";
+import RideInfoCard from "../Cards/RideInfoCard";
+const RideList = ({ park }) => {
   const [operatingRides, setOperatingRides] = useState([]);
   const [closedRides, setClosedRides] = useState([]);
   const [compactView, setCompactView] = useState(false);
@@ -28,8 +28,6 @@ const ParksList = ({ park }) => {
     const parkUrl = park.replace(/\s+/g, "").toLowerCase();
 
     const localStorageData = localStorage.getItem(`park.${parkUrl}.hours`);
-
-    console.log("Local Storage Data:", localStorageData);
 
     const compactViewStorage = JSON.parse(localStorage.getItem("compactView"));
     if (compactViewStorage) {
@@ -263,4 +261,4 @@ const ParksList = ({ park }) => {
   );
 };
 
-export default ParksList;
+export default RideList;

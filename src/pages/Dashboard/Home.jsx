@@ -1,7 +1,8 @@
 import React from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
-import ParksList from "../../components/ParksList";
+
 import { useUserAuth } from "../../hooks/useUserAuth";
+import ParksList from "../../components/Lists/ParksList";
 
 const Home = () => {
   useUserAuth();

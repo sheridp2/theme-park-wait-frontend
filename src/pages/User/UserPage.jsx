@@ -6,8 +6,10 @@ import AddTripForm from "../../components/Other/AddTripForm";
 import axiosInstance from "../../util/axiosInstance";
 import { API_PATHS } from "../../util/apiPaths";
 import toast from "react-hot-toast";
-import TripList from "../../components/Other/TripList";
+
 import DeleteAlert from "../../components/Other/DeleteAlert";
+import TripList from "../../components/Lists/TripList";
+import FavoritesList from "../../components/Lists/FavoritesList";
 
 const UserPage = ({ user }) => {
   useUserAuth();
@@ -34,7 +36,6 @@ const UserPage = ({ user }) => {
       console.log("Something went wrong. Try again", error);
     } finally {
       setLoading(false);
-      console.log(tripData);
     }
   };
 
@@ -89,55 +90,62 @@ const UserPage = ({ user }) => {
 
   return (
     <div className="container mx-auto">
-      <div className="flex flex-wrap py-6 justify-between items-center">
-        <div>
-          <h2>Welcome back, {user?.fullName}!</h2>
-          {tripData.length > 0 && (
-            <p>
-              Only {daysTillTrip(tripData[0]?.startDate)} days till you trip to{" "}
-              {tripData[0]?.park}!
-            </p>
-          )}
-        </div>
-      </div>
       <div>
-        <button
-          type="button"
-          className=" flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-          onClick={() => setOpenAddTripModal(true)}
+        <div className="flex flex-wrap py-6 justify-between items-center">
+          <div>
+            <h2>Welcome back, {user?.fullName}!</h2>
+            {tripData.length > 0 && (
+              <p>
+                Only {daysTillTrip(tripData[0]?.startDate)} days till you trip
+                to {tripData[0]?.park}!
+              </p>
+            )}
+          </div>
+        </div>
+        <div>
+          <button
+            type="button"
+            className=" flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            onClick={() => setOpenAddTripModal(true)}
+          >
+            <FaRegCalendarPlus />
+            <h4 className="ml-2">Add trip</h4>
+          </button>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+          <TripList
+            trips={tripData}
+            onDelete={(id, tripName) => {
+              setOpenDeleteAlert({ show: true, data: id, tripName: tripName });
+            }}
+          />
+        </div>
+        <Modal
+          isOpen={openAddTripModal}
+          onClose={() => setOpenAddTripModal(false)}
+          title="Add New Trip"
         >
-          <FaRegCalendarPlus />
-          <h4 className="ml-2">Add trip</h4>
-        </button>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-        <TripList
-          trips={tripData}
-          onDelete={(id, tripName) => {
-            setOpenDeleteAlert({ show: true, data: id, tripName: tripName });
-          }}
-        />
-      </div>
-      <Modal
-        isOpen={openAddTripModal}
-        onClose={() => setOpenAddTripModal(false)}
-        title="Add New Trip"
-      >
-        <AddTripForm handleAddTrip={handleAddTrip} />
-      </Modal>
+          <AddTripForm handleAddTrip={handleAddTrip} />
+        </Modal>
 
-      <Modal
-        isOpen={openDeleteAlert.show}
-        onClose={() =>
-          setOpenDeleteAlert({ show: false, data: null, tripName: null })
-        }
-        title="Delete Trip"
-      >
-        <DeleteAlert
-          content={`Are you sure you want to delete "${openDeleteAlert.tripName}" from upcoming trips?`}
-          onDelete={() => deleteTrip(openDeleteAlert.data)}
-        />
-      </Modal>
+        <Modal
+          isOpen={openDeleteAlert.show}
+          onClose={() =>
+            setOpenDeleteAlert({ show: false, data: null, tripName: null })
+          }
+          title="Delete Trip"
+        >
+          <DeleteAlert
+            content={`Are you sure you want to delete "${openDeleteAlert.tripName}" from upcoming trips?`}
+            onDelete={() => deleteTrip(openDeleteAlert.data)}
+          />
+        </Modal>
+      </div>
+      <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+
+      <div className="">
+          <FavoritesList />
+      </div>
     </div>
   );
 };

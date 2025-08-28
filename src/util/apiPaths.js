@@ -10,5 +10,11 @@ export const API_PATHS = {
     ADD_TRIP: "/trip/add",
     GET_ALL_TRIPS: "/trip/getAll",
     DELETE_TRIP: (tripId) => `/trip/delete/${tripId}`,
-  }
+  },
+  FAVORITES: {
+    ADD_FAVORITE: (parkName) => `/favorites/add/${parkName}`,
+    GET_ALL_FAVORITES: "/favorites/getAll",
+    GET_PARK_FAVORITES: (parkName) => `/favorites/getAll/${parkName}`,
+    DELETE_FAVORITE: (favoriteId) => `/favorites/delete/${favoriteId}`,
+  },
 };

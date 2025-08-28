@@ -1,5 +1,5 @@
 import React from "react";
-import { rideImages, rideMP4 } from "../util/rideImages";
+import { rideImages, rideMP4 } from "../../util/rideImages";
 import moment from "moment";
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 

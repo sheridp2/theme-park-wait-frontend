@@ -1,6 +1,7 @@
 import React from 'react'
-import { DISNEY_WORLD_PARKS_LIST, DISNEYLAND_PARKS_LIST } from '../util/data'
-import ParkCard from './ParkCard'
+import { DISNEY_WORLD_PARKS_LIST, DISNEYLAND_PARKS_LIST } from '../../util/data'
+import ParkCard from '../Cards/ParkCard'
+
 
 const ParksList = () => {
   return (
