@@ -55,7 +55,11 @@ export default function SignUp() {
       const { token, user } = response.data;
 
       if (token) {
-        localStorage.setItem("token", token);
+        const tokenData = {
+          value: token,
+          timestamp: Date.now(),
+        };
+        localStorage.setItem("token", JSON.stringify(tokenData));
         updateUser(user);
         navigate("/");
       }

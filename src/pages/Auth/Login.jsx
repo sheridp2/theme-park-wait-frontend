@@ -43,7 +43,11 @@ export default function Login() {
       const { token, user } = response.data;
 
       if (token) {
-        localStorage.setItem("token", token);
+        const tokenData = {
+          value: token,
+          timestamp: Date.now(),
+        };
+        localStorage.setItem("token", JSON.stringify(tokenData));
         updateUser(user);
         navigate("/");
       }
@@ -57,8 +61,8 @@ export default function Login() {
   };
 
   useEffect(() => {
-    let isAuth = localStorage.getItem('token')
-   if(isAuth && isAuth !== 'undefined') {
+    let isAuth = localStorage.getItem("token");
+    if (isAuth && isAuth !== "undefined") {
       navigate("/");
     }
   }, []);
