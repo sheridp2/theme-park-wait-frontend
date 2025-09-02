@@ -17,4 +17,8 @@ export const API_PATHS = {
     GET_PARK_FAVORITES: (parkName) => `/favorites/getAll/${parkName}`,
     DELETE_FAVORITE: (favoriteId) => `/favorites/delete/${favoriteId}`,
   },
+  WAITTIMES: {
+    GET_PARK_WAIT_TIME: (parkName) => `/waittimes/${parkName}-waittimes`,
+    GET_PARK_HOURS: (parkName) => `/waittimes/${parkName}-parkhours`,
+  }
 };

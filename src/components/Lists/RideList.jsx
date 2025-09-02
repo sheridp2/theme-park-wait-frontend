@@ -1,9 +1,12 @@
-import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { DISNEY_WORLD_PARKS_LIST, DISNEYLAND_PARKS_LIST } from "../../util/data";
+import {
+  DISNEY_WORLD_PARKS_LIST,
+  DISNEYLAND_PARKS_LIST,
+} from "../../util/data";
 import moment from "moment";
-import { BASE_URL } from "../../util/apiPaths";
+import { API_PATHS, BASE_URL } from "../../util/apiPaths";
 import RideInfoCard from "../Cards/RideInfoCard";
+import axiosInstance from "../../util/axiosInstance";
 const RideList = ({ park }) => {
   const [operatingRides, setOperatingRides] = useState([]);
   const [closedRides, setClosedRides] = useState([]);
@@ -17,74 +20,104 @@ const RideList = ({ park }) => {
     // add more filters here
   });
 
+  const closedRidesArray = [];
+  const operatingRidesArray = [];
+  const parkUrl = park.replace(/\s+/g, "").toLowerCase();
+
+  const localStorageData = localStorage.getItem(`park.${parkUrl}.hours`);
+
   const toggleCompactView = useCallback(() => {
     localStorage.setItem("compactView", JSON.stringify(!compactView));
     setCompactView((prev) => !prev);
   }, [compactView]);
 
+  const setLocalStorageData = (parkName, type, data, expirationTime) => {
+    localStorage.setItem(
+      `park.${parkName}.${type}`,
+      JSON.stringify({
+        ...data,
+        expiresAt: Date.now() + expirationTime,
+      })
+    );
+  };
+
+  const getParkWaittimes = async () => {
+    await axiosInstance
+      .get(`${API_PATHS.WAITTIMES.GET_PARK_WAIT_TIME(parkUrl)}`)
+      .then((res) => {
+        const sortedRides = res.data.sort(
+          (a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0)
+        );
+        sortedRides.forEach((ride) => {
+          if (
+            DISNEY_WORLD_PARKS_LIST.find(
+              (p) => p.name === park
+            )?.ignored.includes(ride.name) ||
+            DISNEYLAND_PARKS_LIST.find(
+              (p) => p.name === park
+            )?.ignored.includes(ride.name) ||
+            DISNEYLAND_PARKS_LIST.find(
+              (p) => p.name === park
+            )?.ignored.includes(ride.id)
+          ) {
+            return;
+          } // Skip this ride
+          if (
+            DISNEY_WORLD_PARKS_LIST.find(
+              (p) => p.name === park
+            )?.stores.includes(ride.name) ||
+            DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.stores.includes(
+              ride.name
+            )
+          ) {
+            ride.meta.type = "STORE";
+          }
+
+          if (ride.waitTime === null) {
+            ride.waitTime = 0;
+          }
+          if (ride.status === "Refurbishment" || ride.status === "Closed") {
+            closedRidesArray.push(ride);
+          } else {
+            operatingRidesArray.push(ride);
+          }
+        });
+        setOperatingRides(operatingRidesArray);
+        setClosedRides(closedRidesArray);
+      });
+  };
+
+  const getParkHours = async () => {
+    await axiosInstance
+      .get(`${API_PATHS.WAITTIMES.GET_PARK_HOURS(parkUrl)}`)
+      .then((res) => {
+        const formattedOpening = moment(res.data[0].openingTime).format(
+          "h:mm A"
+        );
+        const formattedClosing = moment(res.data[0].closingTime).format(
+          "h:mm A"
+        );
+        setOpeningTime(formattedOpening);
+        setClosingTime(formattedClosing);
+        setLocalStorageData(
+          parkUrl,
+          "hours",
+          {
+            openingTime: formattedOpening,
+            closingTime: formattedClosing,
+          },
+          4 * 60 * 60 * 1000
+        );
+      });
+  };
+
   useEffect(() => {
-    const closedRidesArray = [];
-    const operatingRidesArray = [];
-    const parkUrl = park.replace(/\s+/g, "").toLowerCase();
-
-    const localStorageData = localStorage.getItem(`park.${parkUrl}.hours`);
-
     const compactViewStorage = JSON.parse(localStorage.getItem("compactView"));
     if (compactViewStorage) {
       setCompactView(compactViewStorage);
     }
 
-    const setLocalStorageData = (parkName, type, data, expirationTime) => {
-      localStorage.setItem(
-        `park.${parkName}.${type}`,
-        JSON.stringify({
-          ...data,
-          expiresAt: Date.now() + expirationTime,
-        })
-      );
-    };
-
-    axios.get(`${BASE_URL}/waittimes/${parkUrl}-waittimes`).then((res) => {
-      const sortedRides = res.data.sort(
-        (a, b) => (b.waitTime ?? 0) - (a.waitTime ?? 0)
-      );
-      sortedRides.forEach((ride) => {
-        if (
-          DISNEY_WORLD_PARKS_LIST.find(
-            (p) => p.name === park
-          )?.ignored.includes(ride.name) ||
-          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(
-            ride.name
-          ) ||
-          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.ignored.includes(
-            ride.id
-          )
-        ) {
-          return;
-        } // Skip this ride
-        if (
-          DISNEY_WORLD_PARKS_LIST.find((p) => p.name === park)?.stores.includes(
-            ride.name
-          ) ||
-          DISNEYLAND_PARKS_LIST.find((p) => p.name === park)?.stores.includes(
-            ride.name
-          )
-        ) {
-          ride.meta.type = "STORE";
-        }
-
-        if (ride.waitTime === null) {
-          ride.waitTime = 0;
-        }
-        if (ride.status === "Refurbishment" || ride.status === "Closed") {
-          closedRidesArray.push(ride);
-        } else {
-          operatingRidesArray.push(ride);
-        }
-      });
-      setOperatingRides(operatingRidesArray);
-      setClosedRides(closedRidesArray);
-    });
+    getParkWaittimes();
 
     if (localStorageData) {
       const { openingTime, closingTime, expiresAt } =
@@ -97,21 +130,7 @@ const RideList = ({ park }) => {
         localStorage.removeItem(`park.${parkUrl}.hours`);
       }
     } else {
-      axios.get(`${BASE_URL}/waittimes/${parkUrl}-parkhours`).then((res) => {
-        const formattedOpening = moment(res.data[0].openingTime).format("h:mm A");
-        const formattedClosing = moment(res.data[0].closingTime).format("h:mm A");
-        setOpeningTime(formattedOpening);
-        setClosingTime(formattedClosing);
-        setLocalStorageData(
-        parkUrl,
-        "hours",
-        {
-          openingTime: formattedOpening,
-          closingTime: formattedClosing,
-        },
-        4 * 60 * 60 * 1000
-      );
-      });
+      getParkHours();
     }
   }, []);
 

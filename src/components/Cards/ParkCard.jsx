@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment"; // Add this import
-import { BASE_URL } from "../../util/apiPaths";
 import tz from "moment-timezone";
+import { API_PATHS } from "../../util/apiPaths";
+import axiosInstance from "../../util/axiosInstance";
 
 const ParkCard = ({ park }) => {
   const [openingTime, setOpeningTime] = useState("");
@@ -31,8 +31,8 @@ const ParkCard = ({ park }) => {
     );
   };
 
-  const getParkHours = () => {
-    axios.get(`${BASE_URL}/waittimes/${park.hoursUrl}`).then((res) => {
+  const getParkHours = async () => {
+    await axiosInstance.get(`${API_PATHS.WAITTIMES.GET_PARK_HOURS(park.hoursUrl)}`).then((res) => {
       const formattedOpening = moment(res.data[0].openingTime).tz(park.timezone).format("h:mm A z");
       const formattedClosing = moment(res.data[0].closingTime).tz(park.timezone).format("h:mm A z");
       setOpeningTime(formattedOpening);

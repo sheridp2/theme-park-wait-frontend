@@ -77,8 +77,8 @@ export const DISNEY_WORLD_PARKS_LIST = [
     name: "Magic Kingdom",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/630/354/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/cinderella-castle/0724ZQ_0195MS_JLM-16x9.jpg",
-    hoursUrl: "magickingdom-parkhours",
-    waitTimesUrl: "magickingdom-waittimes",
+    hoursUrl: "magickingdom",
+    waitTimesUrl: "magickingdom",
     ignored: [
       "Trick-or-Treat Locations at Mickey's Not-So-Scary Halloween Party",
       "Casey Jr. Splash 'N' Soak Station",
@@ -92,8 +92,8 @@ export const DISNEY_WORLD_PARKS_LIST = [
     name: "Epcot",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1200/675/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/spaceship-earth/0502ZN_0017AS_JB_1-16x9.jpg",
-    hoursUrl: "epcot-parkhours",
-    waitTimesUrl: "epcot-waittimes",
+    hoursUrl: "epcot",
+    waitTimesUrl: "epcot",
     ignored: ["GRAB-N-GOOF"],
     stores: [],
     timezone: "America/New_York",
@@ -103,8 +103,8 @@ export const DISNEY_WORLD_PARKS_LIST = [
     name: "Animal Kingdom",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/715/715/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/tree-of-life/tree-of-life-gallery01-16x9.jpg",
-    hoursUrl: "animalkingdom-parkhours",
-    waitTimesUrl: "animalkingdom-waittimes",
+    hoursUrl: "animalkingdom",
+    waitTimesUrl: "animalkingdom",
     ignored: [],
     stores: [],
     timezone: "America/New_York",
@@ -114,8 +114,8 @@ export const DISNEY_WORLD_PARKS_LIST = [
     name: "Hollywood Studios",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1200/675/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/hollywood-tower-of-terror/Disneys-Hollywood-Studios-27-16x9.jpg",
-    hoursUrl: "hollywoodstudios-parkhours",
-    waitTimesUrl: "hollywoodstudios-waittimes",
+    hoursUrl: "hollywoodstudios",
+    waitTimesUrl: "hollywoodstudios",
     ignored: [],
     stores: [],
     timezone: "America/New_York",
@@ -128,8 +128,8 @@ export const DISNEYLAND_PARKS_LIST = [
     name: "Disneyland",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1349/464/75/dam/disneyland/attractions/disneyland/sleeping-beauty-castle-walkthrough/sleeping-beauty-castle-exterior-16x9.jpg",
-    hoursUrl: "disneyland-parkhours",
-    waitTimesUrl: "disneyland-waittimes",
+    hoursUrl: "disneyland",
+    waitTimesUrl: "disneyland",
     ignored: [
       "Galactic Grill’s Seasonal Novelty Release",
       "Troubadour Tavern's Seasonal Novelty Release",
@@ -144,8 +144,8 @@ export const DISNEYLAND_PARKS_LIST = [
     name: "California Adventure",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/3840/2160/75/vision-dam/digital/parks-platform/parks-global-assets/disneyland/attractions/pixar-pier/dca-pixar-pier-day-16x9.jpg",
-    hoursUrl: "californiaadventure-parkhours",
-    waitTimesUrl: "californiaadventure-waittimes",
+    hoursUrl: "californiaadventure",
+    waitTimesUrl: "californiaadventure",
     ignored: [
       "Hollywood Land’s Seasonal Novelty Release",
       "Paradise Gardens’ Seasonal Novelty Release",
