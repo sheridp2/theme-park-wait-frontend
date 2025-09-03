@@ -28,7 +28,10 @@ const SideMenu = ({ activeMenu }) => {
 
   return (
     <div className="w-64 h-[calc(100vh-61px)] bg-white border-r border-gray-200/50 p-5 sticky top-[61px] z-20">
-      {SIDE_MENU_DATA.main.map((item, index) => ( 
+      <div className="flex flex-wrap pb-6 items-center justify-center">
+        <img src={user?.icon} className="w-20 h-20 rounded-full border border-gray-500" />
+      </div>
+      {SIDE_MENU_DATA.main.map((item, index) => (
         <button
           key={`menu_${index}`}
           className={`w-full flex items-center gap-4 text-[15px] ${
@@ -42,32 +45,34 @@ const SideMenu = ({ activeMenu }) => {
       ))}
 
       {user ? (
-           
-          <button
-            
-            className={`w-full flex items-center gap-4 text-[15px] ${
-              activeMenu == SIDE_MENU_DATA.user[0].label ? "text-white bg-primary" : ""
-            } py-3 px-6 rounded-lg mb-3 `}
-            onClick={() => handleClick(SIDE_MENU_DATA.user[0].path)}
-          >
-            <FaUser className="text-xl" />
-            {SIDE_MENU_DATA.user[0].label === "User Page" && user ? `${user.fullName}'s Page` : SIDE_MENU_DATA.user[0].label}
-          </button>
-      
-        ) : (
-          <button
-            
-            className={`w-full flex items-center gap-4 text-[15px] ${
-              activeMenu == SIDE_MENU_DATA.user[1].label ? "text-white bg-primary" : ""
-            } py-3 px-6 rounded-lg mb-3 `}
-            onClick={() => handleClick(SIDE_MENU_DATA.user[1].path)}
-          >
-            <FaUser className="text-xl" />
-            {SIDE_MENU_DATA.user[1].label === "User Page" && user ? `${user.fullName}'s Page` : SIDE_MENU_DATA.user[0].label}
-          </button>
-          
-        )}
-
+        <button
+          className={`w-full flex items-center gap-4 text-[15px] ${
+            activeMenu == SIDE_MENU_DATA.user[0].label
+              ? "text-white bg-primary"
+              : ""
+          } py-3 px-6 rounded-lg mb-3 `}
+          onClick={() => handleClick(SIDE_MENU_DATA.user[0].path)}
+        >
+          <FaUser className="text-xl" />
+          {SIDE_MENU_DATA.user[0].label === "User Page" && user
+            ? `${user.fullName}'s Page`
+            : SIDE_MENU_DATA.user[0].label}
+        </button>
+      ) : (
+        <button
+          className={`w-full flex items-center gap-4 text-[15px] ${
+            activeMenu == SIDE_MENU_DATA.user[1].label
+              ? "text-white bg-primary"
+              : ""
+          } py-3 px-6 rounded-lg mb-3 `}
+          onClick={() => handleClick(SIDE_MENU_DATA.user[1].path)}
+        >
+          <FaUser className="text-xl" />
+          {SIDE_MENU_DATA.user[1].label === "User Page" && user
+            ? `${user.fullName}'s Page`
+            : SIDE_MENU_DATA.user[0].label}
+        </button>
+      )}
 
       <h4 className="text-md font-semibold mb-4 pt-4">Disney World</h4>
       {SIDE_MENU_DATA.disneyworld.map((item, index) => (

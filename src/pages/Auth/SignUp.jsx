@@ -12,6 +12,7 @@ export default function SignUp() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [icon, setIcon] = useState("");
 
   const { updateUser } = useContext(UserContext);
 
@@ -50,6 +51,7 @@ export default function SignUp() {
         fullName,
         email,
         password,
+        icon,
       });
 
       const { token, user } = response.data;
@@ -106,8 +108,19 @@ export default function SignUp() {
                 type="password"
               />
 
-              {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
-
+              
+            </div>
+            <div className="col-span-2">
+              <Input
+                value={icon}
+                onChange={({ target }) => setIcon(target.value)}
+                label="Icon URL"
+                placeholder="https://example.com/icon.png"
+                type="text"
+              />
+            </div>
+            <div className="col-span-1">
+            {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
               <button type="submit" className="btn-primary">
                 SIGN UP
               </button>
