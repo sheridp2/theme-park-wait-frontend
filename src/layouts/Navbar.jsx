@@ -32,28 +32,29 @@ const Navbar = ({ activeMenu }) => {
         )}
       </button>
 
-      <div className="flex flex-1 items-center justify-between">
-        <h2 className="sm:text-3xl text-xl font-medium text-black">
+      <div className="flex flex-1 items-center ">
+        <h2 className="sm:text-3xl text-lg hidden sm:block font-medium text-black">
           Theme Park Wait Times
         </h2>
-        {user ? (
-          <button
-            type="button"
-            className="text-white  bg-primary hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            onClick={() => handleLogout()}
-          >
-            Logout
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="text-white  bg-primary hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            onClick={() => navigate("/login")}
-          >
-            Login
-          </button>
-          
-        )}
+        <div className="flex flex-1 justify-end">
+          {user ? (
+            <button
+              type="button"
+              className="text-white  bg-primary hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              onClick={() => handleLogout()}
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="text-white  bg-primary hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+          )}
+        </div>
       </div>
       {openSideMenu && (
         <div className="fixed top-[61px] -ml-4 bg-white">

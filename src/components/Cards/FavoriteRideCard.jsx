@@ -3,9 +3,9 @@ import { rideImages, rideMP4 } from "../../util/rideImages";
 
 const FavoriteRideCard = ({ ride }) => {
   return (
-    <li className="pb-3 sm:pb-4">
+    <li className=" p-4 border border-gray-200 bg-gray-50 rounded-lg shadow-md dark:border-gray-700 dark:bg-gray-800">
       <div className="flex items-center space-x-4 rtl:space-x-reverse">
-        <div className="shrink-0">
+        <div className="shrink-0 hidden sm:block">
           {rideMP4.disneyworld[ride.rideName] ? (
             <video
               className="w-8 h-8 rounded-full"
@@ -16,7 +16,7 @@ const FavoriteRideCard = ({ ride }) => {
             />
           ) : (
             <img
-              className="w-8 h-8 rounded-full"
+              className="w-10 h-10 rounded-full"
               src={rideImages.disneyworld[ride.rideName]}
               alt={`Image of ${ride.rideName}`}
             />
@@ -30,8 +30,8 @@ const FavoriteRideCard = ({ ride }) => {
             email@flowbite.com
           </p> */}
         </div>
-        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-          {ride.waitTime} mins
+        <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
+           {ride.waitTime} mins
         </div>
       </div>
     </li>
