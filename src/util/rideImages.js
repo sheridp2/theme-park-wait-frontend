@@ -198,6 +198,8 @@
         "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/animals/Gorilla-Bachelors-Waterfall-Resting-16x9.jpg",
       "Gran Fiesta Tour Starring The Three Caballeros":
         "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/gallery/attractions/epcot/gran-fiesta-tour/gran-fiesta-tour-starring-the-three-caballeros-gallery01.jpg",
+      "Great Moments with Mr. Lincoln":
+        "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/630/354/75/dam/wdpro-assets/dlr/parks-and-tickets/attractions/disneyland/disneyland-story/disneyland-story-00.jpg",
       "Guardians of the Galaxy - Monsters After Dark":
         "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/wdpro-assets/dlr/parks-and-tickets/attractions/disney-california-adventure/guardians-galaxy-mission-breakout-after-dark/new-monsters-after-dark-16x9.jpg",
       "Harambe Market":
