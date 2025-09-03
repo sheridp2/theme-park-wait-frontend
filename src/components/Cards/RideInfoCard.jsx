@@ -41,7 +41,7 @@ const RideInfoCard = ({ ride, compactView }) => {
               />
             )}
           </div>
-          <div className="sm:flex sm:flex-col px-3 py-3 sm:px-6 sm:py-6">
+          <div className="sm:flex sm:flex-col px-3 py-3 sm:px-6 sm:pt-6">
             <div className="">
               <div className="font-bold text-base  mb-1 sm:mb-2 dark:text-white">{ride.name}</div>
               {ride.status === "Down" ? (

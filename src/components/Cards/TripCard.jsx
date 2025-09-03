@@ -5,7 +5,7 @@ import moment from "moment";
 const TripCard = ({ trip, onDelete }) => {
   const { park, tripName, startDate, endDate } = trip;
   return (
-    <div className="p-4 border border-gray-200 rounded-lg shadow-md dark:border-gray-700 dark:bg-gray-800">
+    <div className="p-4 border border-gray-200 bg-gray-50 rounded-lg shadow-md dark:border-gray-700 dark:bg-gray-800">
       <div className="flex justify-between gap-2">
         <div>
           <h3 className="dark:text-white">{tripName}</h3>
