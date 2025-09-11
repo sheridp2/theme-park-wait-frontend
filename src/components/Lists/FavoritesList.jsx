@@ -25,10 +25,9 @@ const FavoritesList = () => {
     <div>
       <h2>Your Favorites</h2>
 
-      {/* TODO: Add add favorites button */}
       <div>
         {favoritesData[0]?.parks.map((park) => (
-          <RideFavoriteList key={park._id} park={park} />
+          <RideFavoriteList key={park._id} park={park} fetchAllFavorites={fetchAllFavorites} />
         ))}
       </div>
     </div>

@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 import Home from "./pages/Dashboard/Home";
 import MagicKingdom from "./pages/DisneyWorld/MagicKingdom";
