@@ -98,13 +98,16 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
           <FavoriteRideCard key={ride._id} ride={ride} onDelete={() => handleDeleteFavorite(ride._id)}  />
         ))}
       </ul>
-      <button
-        type="button"
-        className="w-full mt-4 flex justify-center items-center text-center main-button"
-        onClick={() => setOpenAddFavoriteModal(true)}
-      >
-        <FaPlus /><span className="pl-1.5">Add Favorite</span>
-      </button>
+      {favoritesWithWait.length <= 4 && (
+        <button
+          type="button"
+          className="w-full mt-4 flex justify-center items-center text-center main-button"
+          onClick={() => setOpenAddFavoriteModal(true)}
+        >
+          <FaPlus /><span className="pl-1.5">Add Favorite</span>
+        </button>
+
+      )}
 
       <Modal
         isOpen={openFavoriteModal}
