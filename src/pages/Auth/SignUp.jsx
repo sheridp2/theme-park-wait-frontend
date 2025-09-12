@@ -7,6 +7,7 @@ import { API_PATHS } from "../../util/apiPaths";
 import { UserContext } from "../../context/userContext";
 import AuthLayout from "../../layouts/AuthLayout";
 import axiosInstance from "../../util/axiosInstance";
+import IconSelector from "../../components/Other/IconSelector";
 
 export default function SignUp() {
   const [fullName, setFullName] = useState("");
@@ -24,6 +25,10 @@ export default function SignUp() {
       navigate("/");
     }
   }, []);
+
+  const handleIconSelect = (iconUrl) => {
+    setIcon(iconUrl);
+  }
 
   const navigate = useNavigate();
   const handleSignUp = async (e) => {
@@ -108,17 +113,11 @@ export default function SignUp() {
                 type="password"
               />
 
-              
             </div>
             <div className="col-span-2">
-              <Input
-                value={icon}
-                onChange={({ target }) => setIcon(target.value)}
-                label="Icon URL"
-                placeholder="https://example.com/icon.png"
-                type="text"
-              />
+              <IconSelector handleIconSelect={handleIconSelect} icon={icon} />
             </div>
+        
             <div className="col-span-1">
             {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
               <button type="submit" className="btn-primary">

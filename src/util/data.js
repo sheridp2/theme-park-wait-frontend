@@ -156,3 +156,16 @@ export const DISNEYLAND_PARKS_LIST = [
     timezone: "America/Los_Angeles",
   },
 ];
+
+export const ICON_OPTIONS = [
+  {
+    id: "01",
+    name: "Mickey Mouse",
+    iconUrl: "https://static.wikia.nocookie.net/disney/images/2/2e/Disney_Mickey_Mouse.png",
+  },
+  {
+    id: "02",
+    name: "Optimus Prime",
+    iconUrl: "https://www.watchmojo.com/uploads/thumbs720/Fi-T-Top10-Transformers-Series_J3X5A6-720p30.jpg"
+  }
+]
