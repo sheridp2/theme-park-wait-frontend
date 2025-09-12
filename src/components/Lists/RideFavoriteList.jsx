@@ -36,7 +36,10 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
           `${API_PATHS.WAITTIMES.GET_PARK_WAIT_TIME(parkUrl)}`
         );
         data = res.data;
-        localStorage.setItem(cacheKey, JSON.stringify({ timestamp: now, waittimes: data }));
+        localStorage.setItem(
+          cacheKey,
+          JSON.stringify({ timestamp: now, waittimes: data })
+        );
       } catch (error) {
         console.log("Error fetching wait times", error);
         return;
@@ -45,9 +48,7 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
     setAllParksRides(data);
     // Always use the latest park.favorites, not local state
     const updatedFavorites = (park.favorites || []).map((ride) => {
-      const rideData = data.find(
-        (resRide) => resRide.name === ride.rideName
-      );
+      const rideData = data.find((resRide) => resRide.name === ride.rideName);
       return {
         ...ride,
         waitTime: rideData && rideData.waitTime ? rideData.waitTime : "0",
@@ -61,7 +62,7 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
     try {
       await axiosInstance.post(API_PATHS.FAVORITES.ADD_FAVORITE(park.park), {
         rideName: favoriteDataToAdd.rideName,
-        rideId: favoriteDataToAdd.rideId
+        rideId: favoriteDataToAdd.rideId,
       });
       setOpenAddFavoriteModal(false);
       toast.success("Ride added successfully");
@@ -73,29 +74,32 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
 
   const handleDeleteFavorite = async (rideId) => {
     try {
-      await axiosInstance.delete(API_PATHS.FAVORITES.DELETE_FAVORITE(park.park, rideId));
+      await axiosInstance.delete(
+        API_PATHS.FAVORITES.DELETE_FAVORITE(park.park, rideId)
+      );
       toast.success("Ride deleted successfully");
       fetchAllFavorites();
     } catch (error) {
       console.log("Error deleting favorite", error);
     }
-
   };
 
-
   useEffect(() => {
-
     getParkWaittimes();
   }, [park]);
 
   return (
-    <div className="py-4">
+    <div className="py-2">
       <div className="flex gap-2 py-2 justify-between items-center">
         <h4>{park.park.replaceAll("-", " ")}</h4>
       </div>
       <ul className="w-full divide-y divide-gray-200 dark:divide-gray-700">
         {favoritesWithWait.map((ride) => (
-          <FavoriteRideCard key={ride._id} ride={ride} onDelete={() => handleDeleteFavorite(ride._id)}  />
+          <FavoriteRideCard
+            key={ride._id}
+            ride={ride}
+            onDelete={() => handleDeleteFavorite(ride._id)}
+          />
         ))}
       </ul>
       {favoritesWithWait.length <= 4 && (
@@ -104,9 +108,9 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
           className="w-full mt-4 flex justify-center items-center text-center main-button"
           onClick={() => setOpenAddFavoriteModal(true)}
         >
-          <FaPlus /><span className="pl-1.5">Add Favorite</span>
+          <FaPlus />
+          <span className="pl-1.5">Add Favorite</span>
         </button>
-
       )}
 
       <Modal
@@ -114,7 +118,10 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
         onClose={() => setOpenAddFavoriteModal(false)}
         title={`Add Favorite ${park.park.replaceAll("-", " ")} Ride`}
       >
-        <AddFavoriteForm handleAddFavorite={handleAddFavorite} allParksRides={allParksRides} />
+        <AddFavoriteForm
+          handleAddFavorite={handleAddFavorite}
+          allParksRides={allParksRides}
+        />
       </Modal>
     </div>
   );

@@ -31,22 +31,22 @@ const FavoriteRideCard = ({ ride, onDelete }) => {
           </p>
         </div>
         {ride.status == "Closed" && (
-          <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center sm:text-base text-sm font-semibold text-red-700 dark:text-white">
             <div>Closed</div>
           </div>
         )}
         {ride.status == "Refurbishment" && (
-          <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center sm:text-base text-sm font-semibold text-red-700 dark:text-white">
             <div>Refurbishment</div>
           </div>
         )}
         {ride.status == "Down" && (
-          <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
+          <div className="flex items-center sm:text-base text-sm font-semibold text-red-500 dark:text-white">
             <div>Down</div>
           </div>
         )}
         {ride.status == "Operating" && (
-        <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
+        <div className="flex items-center text-base font-semibold text-black dark:text-white">
           <div>{ride.waitTime} mins</div>
         </div>
         )}
