@@ -8,7 +8,7 @@ import AddFavoriteForm from "../Other/AddFavoriteForm";
 import toast from "react-hot-toast";
 
 const RideFavoriteList = ({ park, fetchAllFavorites }) => {
-  const [favoritesWithWait, setFavoritesWithWait] = useState(park.favorites);
+  const [favoritesWithWait, setFavoritesWithWait] = useState([]);
   const [openFavoriteModal, setOpenAddFavoriteModal] = useState(false);
   const [allParksRides, setAllParksRides] = useState([]);
 
@@ -19,24 +19,41 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
     .toLowerCase();
 
   const getParkWaittimes = async () => {
-    try {
-      const res = await axiosInstance.get(
-        `${API_PATHS.WAITTIMES.GET_PARK_WAIT_TIME(parkUrl)}`
-      );
-      setAllParksRides(res.data);
-      const updatedFavorites = favoritesWithWait.map((ride) => {
-        const rideData = res.data.find(
-          (resRide) => resRide.name === ride.rideName
-        );
-        return {
-          ...ride,
-          waitTime: rideData ? rideData.waitTime : "N/A",
-        };
-      });
-      setFavoritesWithWait(updatedFavorites);
-    } catch (error) {
-      console.log("Error fetching wait times", error);
+    const cacheKey = `waittimes_${parkUrl}`;
+    const cache = localStorage.getItem(cacheKey);
+    const now = Date.now();
+    let data;
+    if (cache) {
+      const { timestamp, waittimes } = JSON.parse(cache);
+      if (now - timestamp < 5 * 60 * 1000) {
+        // Use cached data
+        data = waittimes;
+      }
     }
+    if (!data) {
+      try {
+        const res = await axiosInstance.get(
+          `${API_PATHS.WAITTIMES.GET_PARK_WAIT_TIME(parkUrl)}`
+        );
+        data = res.data;
+        localStorage.setItem(cacheKey, JSON.stringify({ timestamp: now, waittimes: data }));
+      } catch (error) {
+        console.log("Error fetching wait times", error);
+        return;
+      }
+    }
+    setAllParksRides(data);
+    // Always use the latest park.favorites, not local state
+    const updatedFavorites = (park.favorites || []).map((ride) => {
+      const rideData = data.find(
+        (resRide) => resRide.name === ride.rideName
+      );
+      return {
+        ...ride,
+        waitTime: rideData && rideData.waitTime ? rideData.waitTime : "0",
+      };
+    });
+    setFavoritesWithWait(updatedFavorites);
   };
 
   const handleAddFavorite = async (favoriteDataToAdd) => {
@@ -53,10 +70,22 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
     }
   };
 
+  const handleDeleteFavorite = async (rideId) => {
+    try {
+      await axiosInstance.delete(API_PATHS.FAVORITES.DELETE_FAVORITE(park.park, rideId));
+      toast.success("Ride deleted successfully");
+      fetchAllFavorites();
+    } catch (error) {
+      console.log("Error deleting favorite", error);
+    }
+
+  };
+
+
   useEffect(() => {
+
     getParkWaittimes();
-    // eslint-disable-next-line
-  }, []);
+  }, [park]);
 
   return (
     <div className="py-4 max-w-md">
@@ -65,7 +94,7 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
       </div>
       <ul className="w-full divide-y divide-gray-200 dark:divide-gray-700">
         {favoritesWithWait.map((ride) => (
-          <FavoriteRideCard key={ride._id} ride={ride} />
+          <FavoriteRideCard key={ride._id} ride={ride} onDelete={() => handleDeleteFavorite(ride._id)}  />
         ))}
       </ul>
       <button

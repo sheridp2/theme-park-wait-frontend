@@ -1,7 +1,8 @@
 import React from "react";
 import { rideImages, rideMP4 } from "../../util/rideImages";
+import { LuTrash } from "react-icons/lu";
 
-const FavoriteRideCard = ({ ride }) => {
+const FavoriteRideCard = ({ ride, onDelete }) => {
   return (
     <li className=" p-4 border border-gray-200 bg-gray-50 rounded-lg shadow-md dark:border-gray-700 dark:bg-gray-800">
       <div className="flex items-center space-x-4 rtl:space-x-reverse">
@@ -26,14 +27,18 @@ const FavoriteRideCard = ({ ride }) => {
           <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
             {ride.rideName}
           </p>
-          {/* Add delete button */}
-          {/* <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-            email@flowbite.com
-          </p> */}
         </div>
         <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
-           {ride.waitTime} mins
+          <div>{ride.waitTime} mins</div>
         </div>
+          <div>
+            <button
+              className="text-gray-40 hover:text-red-500 group-hover:opacity-100 transition-opacity cursor-pointer"
+              onClick={onDelete}
+            >
+              <LuTrash size={18} />
+            </button>
+          </div>
       </div>
     </li>
   );

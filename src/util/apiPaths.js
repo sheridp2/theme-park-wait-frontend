@@ -15,7 +15,7 @@ export const API_PATHS = {
     ADD_FAVORITE: (parkName) => `/favorites/add/${parkName}`,
     GET_ALL_FAVORITES: "/favorites/getAll",
     GET_PARK_FAVORITES: (parkName) => `/favorites/getAll/${parkName}`,
-    DELETE_FAVORITE: (favoriteId) => `/favorites/delete/${favoriteId}`,
+    DELETE_FAVORITE: (parkName,favoriteId) => `/favorites/delete/${parkName}/${favoriteId}`,
   },
   WAITTIMES: {
     GET_PARK_WAIT_TIME: (parkName) => `/waittimes/${parkName}-waittimes`,
