@@ -126,7 +126,7 @@ const ParkCard = ({ park }) => {
   }, []);
 
   return (
-    <div className="rounded overflow-hidden shadow-lg hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div className="rounded overflow-hidden shadow-lg bg-white hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
       <Link
         to={`/${parkUrl}`}
         parkopening={openingTime}

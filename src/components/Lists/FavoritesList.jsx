@@ -25,7 +25,7 @@ const FavoritesList = () => {
     <div>
       <h2>Your Favorites</h2>
 
-      <div>
+      <div className="grid 2xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-6">
         {favoritesData[0]?.parks.map((park) => (
           <RideFavoriteList key={park._id} park={park} fetchAllFavorites={fetchAllFavorites} />
         ))}

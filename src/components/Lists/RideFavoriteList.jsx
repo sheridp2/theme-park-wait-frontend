@@ -51,6 +51,7 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
       return {
         ...ride,
         waitTime: rideData && rideData.waitTime ? rideData.waitTime : "0",
+        status: rideData ? rideData.status : "Closed",
       };
     });
     setFavoritesWithWait(updatedFavorites);
@@ -88,7 +89,7 @@ const RideFavoriteList = ({ park, fetchAllFavorites }) => {
   }, [park]);
 
   return (
-    <div className="py-4 max-w-md">
+    <div className="py-4">
       <div className="flex gap-2 py-2 justify-between items-center">
         <h4>{park.park.replaceAll("-", " ")}</h4>
       </div>

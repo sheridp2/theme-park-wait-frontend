@@ -3,8 +3,10 @@ import { rideImages, rideMP4 } from "../../util/rideImages";
 import { LuTrash } from "react-icons/lu";
 
 const FavoriteRideCard = ({ ride, onDelete }) => {
+  console.log(ride);
+  
   return (
-    <li className=" p-4 border border-gray-200 bg-gray-50 rounded-lg shadow-md dark:border-gray-700 dark:bg-gray-800">
+    <li className=" p-4 border border-gray-200 bg-white rounded-lg shadow-md dark:border-gray-700 dark:bg-gray-800">
       <div className="flex items-center space-x-4 rtl:space-x-reverse">
         <div className="shrink-0 hidden sm:block">
           {rideMP4.disneyworld[ride.rideName] ? (
@@ -28,9 +30,26 @@ const FavoriteRideCard = ({ ride, onDelete }) => {
             {ride.rideName}
           </p>
         </div>
+        {ride.status == "Closed" && (
+          <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            <div>Closed</div>
+          </div>
+        )}
+        {ride.status == "Refurbishment" && (
+          <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            <div>Refurbishment</div>
+          </div>
+        )}
+        {ride.status == "Down" && (
+          <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
+            <div>Down</div>
+          </div>
+        )}
+        {ride.status == "Operating" && (
         <div className="flex items-center text-base font-semibold text-gray-900 dark:text-white">
           <div>{ride.waitTime} mins</div>
         </div>
+        )}
           <div>
             <button
               className="text-gray-40 hover:text-red-500 group-hover:opacity-100 transition-opacity cursor-pointer"
