@@ -69,12 +69,21 @@ export const SIDE_MENU_DATA = {
       path: "/californiaadventure",
     },
   ],
+  universal: [
+    {
+      id: "08",
+      label: "Universal Studios Florida",
+      icon: GiCastle,
+      path: "/universalstudiosflorida",
+    },
+  ]
 };
 
 export const DISNEY_WORLD_PARKS_LIST = [
   {
     id: "01",
     name: "Magic Kingdom",
+    category: "disney",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/630/354/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/cinderella-castle/0724ZQ_0195MS_JLM-16x9.jpg",
     hoursUrl: "magickingdom",
@@ -90,6 +99,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
   {
     id: "02",
     name: "Epcot",
+    category: "disney",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1200/675/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/spaceship-earth/0502ZN_0017AS_JB_1-16x9.jpg",
     hoursUrl: "epcot",
@@ -101,6 +111,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
   {
     id: "03",
     name: "Animal Kingdom",
+    category: "disney",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/715/715/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/tree-of-life/tree-of-life-gallery01-16x9.jpg",
     hoursUrl: "animalkingdom",
@@ -112,6 +123,7 @@ export const DISNEY_WORLD_PARKS_LIST = [
   {
     id: "04",
     name: "Hollywood Studios",
+    category: "disney",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1200/675/75/vision-dam/digital/parks-platform/parks-global-assets/disney-world/attractions/hollywood-tower-of-terror/Disneys-Hollywood-Studios-27-16x9.jpg",
     hoursUrl: "hollywoodstudios",
@@ -126,6 +138,7 @@ export const DISNEYLAND_PARKS_LIST = [
   {
     id: "05",
     name: "Disneyland",
+    category: "disney",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1349/464/75/dam/disneyland/attractions/disneyland/sleeping-beauty-castle-walkthrough/sleeping-beauty-castle-exterior-16x9.jpg",
     hoursUrl: "disneyland",
@@ -142,6 +155,7 @@ export const DISNEYLAND_PARKS_LIST = [
   {
     id: "06",
     name: "California Adventure",
+    category: "disney",
     image:
       "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/3840/2160/75/vision-dam/digital/parks-platform/parks-global-assets/disneyland/attractions/pixar-pier/dca-pixar-pier-day-16x9.jpg",
     hoursUrl: "californiaadventure",
@@ -157,6 +171,21 @@ export const DISNEYLAND_PARKS_LIST = [
   },
 ];
 
+export const UNIVERSAL_STUDIOS_FLORIDA_PARKS_LIST = [
+  {
+    id: "07",
+    name: "Universal Studios Florida",
+    category: "universal",
+    image:
+      "https://www.universalorlando.com/contentdata/uor/en/us/files/Images/gds/usf-universal-studios-florida-arch-a.jpg",
+    hoursUrl: "universalstudiosflorida",
+    waitTimesUrl: "universalstudiosflorida",
+    ignored: [
+    ],
+    stores: [],
+    timezone: "America/New_York",
+  },
+];
 export const ICON_OPTIONS = [
   {
     id: "01",

@@ -3,7 +3,7 @@ import { rideImages, rideMP4 } from "../../util/rideImages";
 import moment from "moment";
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 
-const RideInfoCard = ({ ride, compactView }) => {
+const RideInfoCard = ({ ride, compactView, parkCategory = "disney" }) => {
   return (
     <>
       {!compactView ? (
@@ -25,10 +25,10 @@ const RideInfoCard = ({ ride, compactView }) => {
               </span>
             )}
             
-            {rideMP4.disneyworld[ride.name] ? (
+            {rideMP4?.[parkCategory]?.[ride.name] ? (
               <video
                 className="w-full h-32 sm:h-48 object-cover"
-                src={rideMP4.disneyworld[ride.name]}
+                src={rideMP4?.[parkCategory]?.[ride.name]}
                 autoPlay
                 loop
                 muted
@@ -36,7 +36,7 @@ const RideInfoCard = ({ ride, compactView }) => {
             ) : (
               <img
                 className="w-full h-32 sm:h-48 object-cover"
-                src={rideImages.disneyworld[ride.name]}
+                src={rideImages?.[parkCategory]?.[ride.name]}
                 alt={`Image of ${ride.name}`}
               />
             )}
@@ -106,10 +106,10 @@ const RideInfoCard = ({ ride, compactView }) => {
         </div>
       ) : (
         <div className="flex items-center justify-between bg-white border border-gray-200 rounded-lg shadow-sm flex-row w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-          {rideMP4.disneyworld[ride.name] ? (
+          {rideMP4?.[parkCategory]?.[ride.name] ? (
             <video
               className="object-cover rounded-t-lg h-auto sm:w-48 w-28 rounded-none rounded-s-lg"
-              src={rideMP4.disneyworld[ride.name]}
+              src={rideMP4?.[parkCategory]?.[ride.name]}
               autoPlay
               loop
               muted
@@ -117,7 +117,7 @@ const RideInfoCard = ({ ride, compactView }) => {
           ) : (
             <img
               className="object-cover rounded-t-lg h-auto sm:w-48 w-28 rounded-none rounded-s-lg"
-              src={rideImages.disneyworld[ride.name]}
+              src={rideImages?.[parkCategory]?.[ride.name]}
               alt={`Image of ${ride.name}`}
             />
           )}

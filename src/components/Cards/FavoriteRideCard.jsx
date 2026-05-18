@@ -9,10 +9,10 @@ const FavoriteRideCard = ({ ride, onDelete }) => {
     <li className=" p-4 border border-gray-200 bg-white rounded-lg shadow-md dark:border-gray-700 dark:bg-gray-800">
       <div className="flex items-center space-x-4 rtl:space-x-reverse">
         <div className="shrink-0 hidden sm:block">
-          {rideMP4.disneyworld[ride.rideName] ? (
+          {rideMP4?.disney?.[ride.rideName] ? (
             <video
               className="w-8 h-8 rounded-full"
-              src={rideMP4.disneyworld[ride.rideName]}
+              src={rideMP4?.disney?.[ride.rideName]}
               autoPlay
               loop
               muted
@@ -20,7 +20,7 @@ const FavoriteRideCard = ({ ride, onDelete }) => {
           ) : (
             <img
               className="w-10 h-10 rounded-full"
-              src={rideImages.disneyworld[ride.rideName]}
+              src={rideImages?.disney?.[ride.rideName]}
               alt={`Image of ${ride.rideName}`}
             />
           )}

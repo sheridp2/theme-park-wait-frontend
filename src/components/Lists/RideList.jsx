@@ -2,7 +2,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   DISNEY_WORLD_PARKS_LIST,
   DISNEYLAND_PARKS_LIST,
+  UNIVERSAL_STUDIOS_FLORIDA_PARKS_LIST,
 } from "../../util/data";
+
+const ALL_PARKS = [
+  ...DISNEY_WORLD_PARKS_LIST,
+  ...DISNEYLAND_PARKS_LIST,
+  ...UNIVERSAL_STUDIOS_FLORIDA_PARKS_LIST,
+];
 import moment from "moment";
 import { API_PATHS, BASE_URL } from "../../util/apiPaths";
 import RideInfoCard from "../Cards/RideInfoCard";
@@ -23,6 +30,7 @@ const RideList = ({ park }) => {
   const closedRidesArray = [];
   const operatingRidesArray = [];
   const parkUrl = park.replace(/\s+/g, "").toLowerCase();
+  const parkCategory = ALL_PARKS.find((p) => p.name === park)?.category ?? "disney";
 
   const localStorageData = localStorage.getItem(`park.${parkUrl}.hours`);
 
@@ -247,6 +255,7 @@ const RideList = ({ park }) => {
                 key={ride.id}
                 ride={ride}
                 compactView={compactView}
+                parkCategory={parkCategory}
               />
             ))}
         </div>
@@ -272,6 +281,7 @@ const RideList = ({ park }) => {
                 key={ride.id}
                 ride={ride}
                 compactView={compactView}
+                parkCategory={parkCategory}
               />
             ))}
         </div>

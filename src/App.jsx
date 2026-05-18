@@ -11,6 +11,7 @@ import AnimalKingdom from "./pages/DisneyWorld/AnimalKingdom";
 import HollywoodStudios from "./pages/DisneyWorld/HollywoodStudios";
 import Disneyland from "./pages/Disneyland/Disneyland";
 import CaliforniaAdventure from "./pages/Disneyland/CaliforniaAdventure";
+import UniversalStudiosFlorida from "./pages/UniversalStudios/UniversalStudiosFlorida";
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
 import UserProvider from "./context/userContext";
@@ -43,6 +44,7 @@ function App() {
             <Route path="/animalkingdom" element={<AnimalKingdom />} />
             <Route path="/hollywoodstudios" element={<HollywoodStudios />} />
             <Route path="/disneyland" element={<Disneyland />} />
+            <Route path="/universalstudiosflorida" element={<UniversalStudiosFlorida />} />
             <Route
               path="/californiaadventure"
               element={<CaliforniaAdventure />}
